@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sweet Thuty | Banco de Dados</title>
+
+    <link rel="stylesheet" href="confeitaria.css">
+
+</head>
+
+
+<body>
+
+
+
+    <header id="inicio">
+
+        <div class="decoracao decoracao-esquerda">
+            ♡
+        </div>
+
+        <div class="decoracao decoracao-direita">
+            ♡
+        </div>
+
+
+        <div class="capa">
+
+
+            <div class="doce doce-esquerda">
+                🧁
+            </div>
+
+
+            <div class="conteudo-capa">
+
+                <div class="logo-doce">
+                    🧁
+                </div>
+
+                <h1>
+                    <span>Sweet</span>
+                    <strong>Thuty</strong>
+                </h1>
+
+                <div class="linha-logo">
+                    ♡
+                </div>
+
+                <h2>
+                    Banco de Dados da Confeitaria
+                </h2>
+
+                <p>
+                    Organizando sabores e dados com muito carinho!
+                </p>
+
+            </div>
+
+
+            <div class="doce doce-direita">
+                🍰
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="#inicio">
+                    <span>⌂</span>
+                    Início
+                </a>
+            </li>
+
+            <li>
+                <a href="#banco">
+                    <span>▣</span>
+                    Banco de Dados
+                </a>
+            </li>
+
+            <li>
+                <a href="#entidades">
+                    <span>♧</span>
+                    Entidades
+                </a>
+            </li>
+
+           
+
+            <li>
+                <a href="#relacionamentos">
+                    <span>🔗</span>
+                    Relacionamentos
+                </a>
+            </li>
+
+            <li>
+                <a href="#dicionario">
+                    <span>📖</span>
+                    Dicionário
+                </a>
+            </li>
+
+            <li>
+                <a href="#integrantes">
+                    <span>♡</span>
+                     Integrantes
+                </a>
+            </li>
+
+            <li>
+                <a href="#diagrama">
+                    <span>♧</span>
+                    Diagrama
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+
+
+    <main>
+
+
+        
+
+        <section class="secao destaque" id="sobre">
+
+            <div class="icone-secao">
+                🧁
+            </div>
+
+
+            <div class="conteudo-secao">
+
+                <h2>
+                    Sobre o projeto
+                </h2>
+
+                <p>
+                    Este projeto apresenta a estrutura de um banco de dados
+                    desenvolvido para auxiliar no gerenciamento de uma
+                    confeitaria.
+                </p>
+
+                <p>
+                    O banco de dados permite organizar informações
+                    relacionadas a clientes, pedidos, produtos, receitas,
+                    insumos, estoque, fornecedores e movimentações
+                    financeiras.
+                </p>
+
+            </div>
+
+
+            <div class="frase-decorativa">
+
+                <span>♡</span>
+
+                Organização também é
+                um ingrediente do sucesso!
+
+                <span>♡</span>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="secao" id="banco">
+
+            <div class="icone-secao">
+                🗄️
+            </div>
+
+
+            <div class="conteudo-secao">
+
+                <h2>
+                    Estrutura do Banco de Dados
+                </h2>
+
+                <p>
+                    O banco de dados é composto por diferentes entidades
+                    que se relacionam para organizar as informações
+                    da confeitaria.
+                </p>
+
+                <p>
+                    Cada entidade possui informações específicas e está
+                    relacionada com outras entidades para permitir o
+                    armazenamento e a organização dos dados.
+                </p>
+
+            </div>
+
+
+            <div class="ilustracao">
+
+                🗄️
+
+                <div class="pontilhado">
+                    ♡ · · · ♡
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+        <section class="secao secao-grande" id="entidades">
+
+            <div class="icone-secao">
+                👥
+            </div>
+
+
+            <div class="conteudo-secao">
+
+                <h2>
+                    Entidades do Banco de Dados
+                </h2>
+
+                <p>
+                    O banco de dados é formado por entidades que representam
+                    os principais elementos envolvidos no funcionamento
+                    da confeitaria.
+                </p>
+
+
+                <div class="entidades">
+
+
+                    <div class="entidade">
+                        <span>🍰</span>
+                        <h3>CLIENTE</h3>
+                        <p>
+                            Armazena as informações dos clientes
+                            da confeitaria.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🛒</span>
+                        <h3>PEDIDO</h3>
+                        <p>
+                            Registra os pedidos realizados
+                            pelos clientes.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>📋</span>
+                        <h3>ITEM_PEDIDOS</h3>
+                        <p>
+                            Representa os itens que fazem parte
+                            de cada pedido.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🧁</span>
+                        <h3>PRODUTO</h3>
+                        <p>
+                            Armazena os produtos comercializados
+                            pela confeitaria.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🏷️</span>
+                        <h3>CATEGORIA_PRODUTO</h3>
+                        <p>
+                            Organiza os produtos em diferentes
+                            categorias.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>📖</span>
+                        <h3>RECEITA</h3>
+                        <p>
+                            Relaciona os produtos aos insumos
+                            utilizados em sua produção.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🥛</span>
+                        <h3>INSUMO</h3>
+                        <p>
+                            Representa os ingredientes e materiais
+                            utilizados na produção.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>📦</span>
+                        <h3>ESTOQUE</h3>
+                        <p>
+                            Controla as informações relacionadas
+                            aos insumos disponíveis.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🚚</span>
+                        <h3>FORNECEDORES</h3>
+                        <p>
+                            Armazena informações dos fornecedores
+                            da confeitaria.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>🔄</span>
+                        <h3>MOVIMENTAÇÃO_ESTOQUE</h3>
+                        <p>
+                            Registra as movimentações realizadas
+                            no estoque.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>💳</span>
+                        <h3>PAGAMENTO</h3>
+                        <p>
+                            Registra as informações relacionadas
+                            aos pagamentos dos pedidos.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>💰</span>
+                        <h3>FINANCEIRO</h3>
+                        <p>
+                            Auxilia no registro das informações
+                            financeiras da confeitaria.
+                        </p>
+                    </div>
+
+
+                    <div class="entidade">
+                        <span>👤</span>
+                        <h3>USUÁRIO</h3>
+                        <p>
+                            Representa os usuários responsáveis
+                            pelo acesso ao sistema.
+                        </p>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+
+        <section class="secao secao-grande" id="relacionamentos">
+
+            <div class="icone-secao">
+                🔗
+            </div>
+
+
+            <div class="conteudo-secao">
+
+                <h2>
+                    Relacionamentos
+                </h2>
+
+                <p>
+                    As entidades do banco de dados estão relacionadas
+                    entre si para permitir que as informações da
+                    confeitaria sejam organizadas.
+                </p>
+
+
+                <div class="relacionamentos">
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            CLIENTE → PEDIDO
+                        </h3>
+
+                        <p>
+                            Um cliente pode realizar pedidos, e cada pedido
+                            está relacionado a um cliente.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            PEDIDO → ITEM_PEDIDOS
+                        </h3>
+
+                        <p>
+                            Um pedido pode possuir vários itens,
+                            enquanto cada item pertence a um pedido.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            ITEM_PEDIDOS → PRODUTO
+                        </h3>
+
+                        <p>
+                            Cada item de pedido está relacionado
+                            a um produto comercializado pela confeitaria.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            PRODUTO → CATEGORIA_PRODUTO
+                        </h3>
+
+                        <p>
+                            Os produtos podem ser organizados
+                            de acordo com suas categorias.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            PRODUTO → RECEITA
+                        </h3>
+
+                        <p>
+                            A receita representa os insumos utilizados
+                            na produção dos produtos.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            RECEITA → INSUMO
+                        </h3>
+
+                        <p>
+                            Uma receita utiliza os insumos necessários
+                            para produzir determinado produto.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            FORNECEDORES → INSUMO
+                        </h3>
+
+                        <p>
+                            Os fornecedores estão relacionados aos insumos
+                            utilizados pela confeitaria.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            INSUMO → ESTOQUE
+                        </h3>
+
+                        <p>
+                            O estoque permite controlar a quantidade
+                            disponível dos insumos.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            ESTOQUE → MOVIMENTAÇÃO_ESTOQUE
+                        </h3>
+
+                        <p>
+                            As movimentações registram alterações
+                            relacionadas ao estoque.
+                        </p>
+
+                    </div>
+
+
+                    <div class="relacionamento">
+
+                        <h3>
+                            PEDIDO → PAGAMENTO
+                        </h3>
+
+                        <p>
+                            Os pagamentos estão relacionados aos pedidos
+                            realizados pelos clientes.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="secao secao-grande" id="dicionario">
+
+            <div class="icone-secao">
+                📖
+            </div>
+        
+            <div class="conteudo-secao">
+        
+                <h2>Dicionário de Dados</h2>
+        
+                <p>
+                    Aqui estão todos os atributos de cada entidade, com tipo de dado,
+                    chave e descrição. Clique em uma entidade para abrir a tabela.
+                </p>
+        
+                <div class="dic-acoes">
+                    <button type="button" id="dic-abrir">Abrir todas</button>
+                    <button type="button" id="dic-fechar">Fechar todas</button>
+                </div>
+        
+                <div id="dic-lista"></div>
+        
+               
+                    
+        
+            </div>
+        
+        </section>
+
+
+<section class="secao secao-integrantes" id="integrantes">
+
+    <div class="icone-secao">
+        💻🤓🤓🤓🤓
+        
+    </div>
+
+
+    <div class="conteudo-secao">
+
+        <h2>
+            Integrantes do Grupo
+        </h2>
+
+        <p>
+            Este projeto foi desenvolvido em equipe,
+            reunindo diferentes ideias e contribuições
+            para a construção do banco de dados da Sweet Thuty.
+        </p>
+
+
+        <div class="integrantes">
+
+
+            <div class="integrante">
+
+                <div class="foto-integrante">
+                    👩🏻‍💻
+                </div>
+
+                <h3>
+                    Rafaella Lopes
+                </h3>
+
+                <p>
+                    Desenvolvimento
+                </p>
+
+            </div>
+
+
+            <div class="integrante">
+
+                <div class="foto-integrante">
+                    👨🏻‍💻
+                </div>
+
+                <h3>
+                    Luiz Alves
+                </h3>
+
+                <p>
+                    Banco de Dados
+                </p>
+
+            </div>
+
+
+            <div class="integrante">
+
+                <div class="foto-integrante">
+                    👨🏻‍💻
+                </div>
+
+                <h3>
+                    David Mota 
+                </h3>
+
+                <p>
+                    Desenvolvimento
+                </p>
+
+            </div>
+
+
+            <div class="integrante">
+
+                <div class="foto-integrante">
+                    👨🏻‍💻
+                </div>
+
+                <h3>
+                    Lucas Ronaldo
+                </h3>
+
+                <p>
+                    Banco de Dados
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+        <section class="secao" id="diagrama">
+
+            <div class="icone-secao">
+                ♧
+            </div>
+
+
+            <div class="conteudo-secao">
+
+                <h2>
+                    Diagrama Entidade-Relacionamento
+                </h2>
+
+                <p>
+                    O diagrama entidade-relacionamento apresenta a
+                    estrutura do banco de dados e os relacionamentos
+                    entre suas entidades.
+                </p>
+
+
+                <a
+                    href="https://app.diagrams.net/#G1Rrv44Xpm81jthJMvqEto2Nqig6xrX7OA#%7B%22pageId%22%3A%22HDCcQtZZ3W24mumQj28f%22%7D"
+                    target="_blank"
+                    class="botao-diagrama"
+                >
+                    ↗ Abrir diagrama no draw.io
+                </a>
+
+            </div>
+
+
+            <div class="frase-decorativa">
+
+                ♡
+
+                <br>
+
+                O diagrama mostra
+                como tudo se conecta!
+
+                <br>
+
+                ♡
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- RODAPÉ -->
+   
+
+    <footer>
+
+        <div class="coracao">
+            ♥
+        </div>
+
+        <p>
+            <strong>Sweet Thuty</strong>
+        </p>
+
+        <p>
+            Projeto acadêmico - Banco de Dados
+        </p>
+
+        <p>
+            Contato: 1195483-1953
+        </p>
+
+        <div class="coracao">
+            ♥
+        </div>
+
+    </footer>
+
+    <script>
+        /* Atributo: [nome, tipo, chave, obrigatório, descrição] */
+        const DICIONARIO = [
+            ["CLIENTE", [
+                ["id_cliente", "INT (auto)", "PK", "Sim", "Identificador do cliente"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Nome do cliente"],
+                ["telefone", "VARCHAR(20)", "", "Sim", "Telefone/WhatsApp"],
+                ["endereço", "VARCHAR(200)", "", "Não", "Endereço de contato/entrega"]
+            ]],
+            ["PEDIDO", [
+                ["id_pedidos", "INT (auto)", "PK", "Sim", "Identificador do pedido"],
+                ["id_clientes", "INT", "FK → CLIENTE", "Sim", "Cliente do pedido"],
+                ["data_pedidos", "DATE", "", "Sim", "Data do pedido"],
+                ["data_entrega", "DATE", "", "Sim", "Data prevista de entrega"],
+                ["hora_entrega", "TIME", "", "Não", "Horário previsto de entrega"],
+                ["status", "VARCHAR(20)", "", "Sim", "Pendente, em produção, entregue, cancelado"],
+                ["valor_total", "DECIMAL(10,2)", "", "Sim", "Valor total"],
+                ["observações", "TEXT", "", "Não", "Detalhes e personalizações"],
+                ["foto_referências", "VARCHAR(255)", "", "Não", "Caminho/URL da foto de referência"]
+            ]],
+            ["ITEM_PEDIDOS", [
+                ["id_pedidos", "INT", "PK", "Sim", "Conforme o diagrama"],
+                ["id_clientes", "INT", "FK", "Sim", "Conforme o diagrama"],
+                ["data_pedidos", "DATE", "", "Sim", "Conforme o diagrama"],
+                ["data_entrega", "DATE", "", "Sim", "Conforme o diagrama"],
+                ["hora_entrega", "TIME", "", "Não", "Conforme o diagrama"]
+            ]],
+            ["PRODUTO", [
+                ["id_produto", "INT (auto)", "PK", "Sim", "Identificador do produto"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Nome do produto"],
+                ["descrição", "TEXT", "", "Não", "Descrição"],
+                ["categoria", "INT", "FK → CATEGORIA_PRODUTO", "Sim", "Categoria do produto"],
+                ["tamanho", "VARCHAR(30)", "", "Não", "P, M, G, 20 cm…"],
+                ["quantidade_pessoas", "INT", "", "Não", "Quantas pessoas serve"],
+                ["preço_base", "DECIMAL(10,2)", "", "Sim", "Preço base de venda"],
+                ["ativo", "BOOLEAN", "", "Sim", "Produto disponível ou não"]
+            ]],
+            ["CATEGORIA_PRODUTO", [
+                ["id_categoria", "INT (auto)", "PK", "Sim", "Identificador da categoria"],
+                ["nome", "VARCHAR(80)", "", "Sim", "Bolos, doces, tortas…"],
+                ["descrição", "VARCHAR(255)", "", "Não", "Descrição da categoria"],
+                ["ativo", "BOOLEAN", "", "Sim", "Categoria ativa ou não"]
+            ]],
+            ["RECEITA", [
+                ["id_receitas", "INT (auto)", "PK", "Sim", "Identificador da receita"],
+                ["id_produtos", "INT", "FK → PRODUTO", "Sim", "Produto da receita"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Nome da receita"],
+                ["descrições", "TEXT", "", "Não", "Modo de preparo e observações"]
+            ]],
+            ["INSUMO", [
+                ["id_insumo", "INT (auto)", "PK", "Sim", "Identificador do insumo"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Farinha, chocolate…"],
+                ["categoria", "VARCHAR(50)", "", "Não", "Categoria do insumo"],
+                ["unidade_medida", "VARCHAR(10)", "", "Sim", "kg, g, L, un"],
+                ["tipo", "VARCHAR(30)", "", "Não", "Ingrediente, embalagem…"],
+                ["estoque_minimo", "DECIMAL(10,2)", "", "Não", "Quantidade mínima para alerta"],
+                ["ativo", "BOOLEAN", "", "Sim", "Insumo ativo ou não"]
+            ]],
+            ["ESTOQUE", [
+                ["id_cliente", "INT", "PK", "Sim", "Conforme o diagrama (ver revisão 2)"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Conforme o diagrama"],
+                ["telefone", "VARCHAR(20)", "", "Não", "Conforme o diagrama"],
+                ["endereço", "VARCHAR(200)", "", "Não", "Conforme o diagrama"]
+            ]],
+            ["FORNECEDORES", [
+                ["(sem PK)", "", "", "", "Sem chave primária no diagrama (ver revisão 3)"],
+                ["nomes", "VARCHAR(100)", "", "Sim", "Nome do fornecedor"],
+                ["telefones", "VARCHAR(20)", "", "Não", "Telefone de contato"],
+                ["endereços", "VARCHAR(200)", "", "Não", "Endereço do fornecedor"]
+            ]],
+            ["MOVIMENTAÇÃO_ESTOQUE", [
+                ["id_movimentação", "INT (auto)", "PK", "Sim", "Identificador da movimentação"],
+                ["id_insumos", "INT", "FK → INSUMO", "Sim", "Insumo movimentado"],
+                ["tipo_movimentação", "VARCHAR(20)", "", "Sim", "Entrada ou saída"],
+                ["quantidade", "DECIMAL(10,2)", "", "Sim", "Quantidade movimentada"],
+                ["data_movimentação", "DATE", "", "Sim", "Data da movimentação"],
+                ["motivos", "VARCHAR(255)", "", "Não", "Compra, uso em produção, perda"]
+            ]],
+            ["PAGAMENTO", [
+                ["id_pagamento", "INT (auto)", "PK", "Sim", "Identificador do pagamento"],
+                ["id_pedido", "INT", "FK → PEDIDO", "Sim", "Pedido pago"],
+                ["valor", "DECIMAL(10,2)", "", "Sim", "Valor pago"],
+                ["forma_pagamento", "VARCHAR(30)", "", "Sim", "Forma de pagamento"],
+                ["data_pagamento", "DATE", "", "Sim", "Data do pagamento"]
+            ]],
+            ["FINANCEIRO", [
+                ["id_financeiro", "INT (auto)", "PK", "Sim", "Identificador do lançamento"],
+                ["id_pedido", "INT", "FK → PEDIDO", "Não", "Pedido relacionado"],
+                ["tipo", "VARCHAR(20)", "", "Sim", "Entrada ou saída"],
+                ["descrição", "VARCHAR(255)", "", "Não", "Descrição do lançamento"],
+                ["valor", "DECIMAL(10,2)", "", "Sim", "Valor"],
+                ["data_movimentação", "DATE", "", "Sim", "Data da movimentação"],
+                ["forma_pagamento", "VARCHAR(30)", "", "Não", "Pix, dinheiro, cartão…"]
+            ]],
+            ["USUÁRIO", [
+                ["id_usuario", "INT (auto)", "PK", "Sim", "Identificador do usuário"],
+                ["nome", "VARCHAR(100)", "", "Sim", "Nome completo"],
+                ["login", "VARCHAR(50)", "", "Sim (único)", "Nome de acesso"],
+                ["senha", "VARCHAR(255)", "", "Sim", "Senha (guardar em hash)"],
+                ["nivel_acesso", "VARCHAR(20)", "", "Sim", "Perfil de permissão (admin, atendente)"],
+                ["ativo", "BOOLEAN", "", "Sim", "Usuário ativo ou não"]
+            ]]
+        ];
+    
+        const tagChave = k => k ? `<span class="${k[0] === "P" ? "dic-pk" : "dic-fk"}">${k}</span>` : "";
+    
+        document.getElementById("dic-lista").innerHTML = DICIONARIO.map(([nome, atributos]) => `
+            <details>
+                <summary>${nome}</summary>
+                <div class="dic-tabela">
+                    <table>
+                        <tr><th>Atributo</th><th>Tipo</th><th>Chave</th><th>Obrig.</th><th>Descrição</th></tr>
+                        ${atributos.map(a => `
+                        <tr>
+                            <td><code>${a[0]}</code></td>
+                            <td>${a[1]}</td>
+                            <td>${tagChave(a[2])}</td>
+                            <td>${a[3]}</td>
+                            <td>${a[4]}</td>
+                        </tr>`).join("")}
+                    </table>
+                </div>
+            </details>`).join("");
+    
+        const abrirTodas = estado =>
+            document.querySelectorAll("#dic-lista details").forEach(d => d.open = estado);
+    
+        document.getElementById("dic-abrir").addEventListener("click", () => abrirTodas(true));
+        document.getElementById("dic-fechar").addEventListener("click", () => abrirTodas(false));
+    </script>
+
+
+</body>
+
+
+
+</html>
