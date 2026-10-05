@@ -23,13 +23,56 @@
 ## 1. Caracterização da Organização
 *(vale 7,5% — Dimensão Conceitual)*
 
-- Nome e natureza da organização: Sweet Thuty, estabelecimento comercial focado em confeitaria 
-- **Contexto e porte:** *com ou sem fins lucrativos; tamanho da operação; número de pessoas envolvidas (funcionários, voluntários, membros, fiéis); volume de atividades (vendas, atendimentos, doações, rituais, eventos).*
-- **Problemas e necessidades identificados:** *qual é a "crise operacional" — o que está desorganizado hoje (planilhas soltas, papel, falta de controle de estoque/doações/cadastros, etc.)?*
-- **Justificativa da escolha: por que essa organização foi escolhida e por que ela é um bom caso para o projeto?
-- **Evidências da organização:** *comprove que a organização existe e que o grupo teve acesso a ela — ex.: fotos do local/da visita, link da organização no Google (Google Maps/Google Meu Negócio, site, rede social), endereço completo e forma de contato (telefone, e-mail, responsável pela organização).*
+- Nome e natureza da organização: Sweet Thuty, estabelecimento comercial focado em confeitaria
+  
+- **Contexto e porte:** A organização analisada é um estabelecimento de pequeno porte, com fins lucrativos, voltado para o atendimento e comercialização de produtos alimentícios. Atualmente, a operação conta com 3 funcionárias, cada uma responsável por uma função específica no funcionamento diário do estabelecimento.
 
----
+Sthefany: responsável pelo atendimento no balcão e pelo contato direto com os clientes;
+
+Tuany: responsável pelo caixa e pelo recebimento dos pagamentos;
+
+Maria: responsável pela cozinha e pela preparação dos produtos.
+
+Por possuir uma equipe reduzida, as atividades são distribuídas entre as três funcionárias, sendo necessário manter uma boa organização dos processos para garantir o atendimento aos clientes, o controle das vendas e o funcionamento adequado da cozinha. O estabelecimento realiza atividades de atendimento ao público e vendas de produtos alimentícios, tendo seu volume de atividades diretamente relacionado ao fluxo diário
+
+- **Problemas e necessidades identificados:
+
+A organização apresenta atualmente alguns problemas relacionados principalmente ao gerenciamento dos pedidos, atendimento aos clientes, armazenamento dos dados, controle de estoque e acompanhamento financeiro.
+
+Um dos principais problemas ocorreu com o aplicativo Anota.ai, utilizado anteriormente pela organização. Segundo o relato da responsável, havia dificuldades relacionadas ao atendimento e ao suporte oferecido pela plataforma. Atualmente, a organização utiliza o sistema Consumer, principalmente pela possibilidade de acesso remoto. Entretanto, houve um problema quando o computador utilizado pela empresa apresentou uma falha, pois parte dos dados estava armazenada no disco do equipamento. Isso demonstrou a necessidade de uma solução mais segura para o armazenamento das informações, evitando que uma falha no computador resulte na perda ou indisponibilidade dos dados.
+
+Outro problema identificado está relacionado ao atendimento ao cliente. A responsável prefere ter a possibilidade de conversar diretamente com os clientes, em vez de depender exclusivamente de atendimentos automatizados por robôs. Ela também busca um sistema mais simples e prático, que não exija uma quantidade excessiva de cadastros ou informações para realizar pedidos simples, como a encomenda de um bolo.
+
+Também existe uma necessidade de melhorar o controle financeiro e operacional. A responsável gostaria de visualizar de forma clara as entradas e saídas da empresa, além de acompanhar sua margem e ter informações que permitam compreender melhor a situação financeira do negócio.
+
+Em relação ao estoque, existe a necessidade de saber quais produtos e recursos estão disponíveis, onde estão armazenados e quanto ainda resta de cada item. O sistema também deveria emitir alertas quando determinado recurso estiver próximo de acabar, permitindo que a responsável se antecipe à falta de materiais.
+
+Outro ponto importante é a necessidade de notificações simples e acessíveis. Em vez de informações complexas ou difíceis de interpretar, a responsável gostaria de receber avisos de maneira clara, preferencialmente por um canal que já utilize no dia a dia, como o WhatsApp, informando situações como estoque baixo, necessidade de reposição e proximidade da data de entrega de um pedido.
+
+A organização também identificou a necessidade de um servidor em nuvem, permitindo que os dados sejam armazenados com maior segurança e acessados remotamente, independentemente de um único computador. Além disso, existe o interesse em integrar as funcionalidades utilizadas atualmente no Anota.ai ao próprio sistema de gerenciamento da confeitaria, evitando a necessidade de utilizar diversas ferramentas separadas.
+
+Por fim, o sistema ideal deverá permitir o acompanhamento dos pedidos e das datas de entrega, enviando lembretes antecipados e próximos à data programada. Dessa forma, a responsável poderá se organizar com antecedência para a produção e entrega dos pedidos.
+
+Diante desses problemas, a principal crise operacional identificada pode ser resumida como a falta de uma solução centralizada, simples e segura para gerenciar pedidos, clientes, estoque, informações financeiras e entregas, além da dependência de sistemas externos e do armazenamento de dados em equipamentos locais.
+
+
+- Justificativa da escolha:
+
+
+A organização foi escolhida para o desenvolvimento do projeto por apresentar necessidades reais de organização, controle e gerenciamento das atividades, permitindo que o grupo desenvolva uma solução diretamente relacionada aos problemas enfrentados no dia a dia da empresa.
+
+A confeitaria possui uma equipe pequena, formada por três funcionárias, o que torna ainda mais importante a utilização de ferramentas simples e eficientes para auxiliar na administração dos pedidos, estoque, atendimento e informações financeiras. Atualmente, a organização utiliza diferentes recursos e sistemas, mas já enfrentou dificuldades com o atendimento, armazenamento de dados e dependência de equipamentos específicos.
+
+Um dos principais motivos para a escolha foi a ocorrência de problemas relacionados à perda ou indisponibilidade de informações quando o computador apresentou uma falha, evidenciando a necessidade de um sistema com armazenamento em nuvem e maior segurança dos dados. Além disso, a responsável demonstrou interesse em ter uma ferramenta centralizada que facilite o acompanhamento dos pedidos, controle o estoque, apresente as entradas e saídas financeiras e gere alertas sobre recursos próximos do fim e pedidos próximos da data de entrega.
+
+A organização também se mostrou um bom caso para o projeto porque a responsável possui uma visão clara sobre suas necessidades e está aberta à utilização de uma solução tecnológica que seja prática, simples e adequada à rotina da empresa. Entre suas principais expectativas estão a redução de cadastros desnecessários, a possibilidade de manter um contato mais direto com os clientes e o recebimento de avisos por meios de comunicação que já fazem parte de sua rotina, como o WhatsApp.
+
+Dessa forma, a organização apresenta um cenário adequado para o desenvolvimento do projeto, pois os problemas identificados são concretos e podem ser transformados em requisitos para um sistema de gerenciamento integrado. A solução proposta poderá contribuir para centralizar as informações, melhorar o controle dos pedidos e do estoque, aumentar a segurança dos dados e facilitar a tomada de decisões pela responsável.
+
+Portanto, a escolha da organização se justifica pela possibilidade de desenvolver uma solução tecnológica baseada em necessidades reais de uma pequena empresa, proporcionando uma aplicação prática dos conhecimentos adquiridos no projeto e buscando gerar benefícios para a rotina operacional da organização.
+
+
+
 
 ## 2. Processos de Negócio
 *(vale 10% — Dimensão Procedimental)*
@@ -108,10 +151,9 @@ Para cada entidade identificada, liste:
 
 Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.) em qualquer parte do trabalho, registre **para cada uso relevante**:
 
-| Item | O que registrar |
-|------|------------------|
-| **Ferramenta e etapa** | Qual IA foi usada e em qual parte do trabalho (ex.: pesquisa sobre o setor da organização, redação do README, organização dos requisitos, revisão ortográfica/gramatical). |
-| **Motivação** | Por que o grupo recorreu à IA nesse ponto específico. |
+
+| **Ferramenta e etapa** | Qual IA foi usada e em qual parte do trabalho: CHATGPT PARA FUNCIONALIDADES DO SITE
+| **Motivação**: POIS TINHAMOS DÚVIDAS REFERENTES AOS FUNCIONALIDADES DO SITE, PRINCIPALMENTE A VISUALIZAÇÃO.
 | **Prompt(s) utilizados** | Texto exato (ou muito próximo) do que foi perguntado/pedido à IA. |
 | **Resposta recebida** | Resumo ou trecho relevante da resposta da IA. |
 | **Fontes consultadas e verificadas** | Se a IA citou fontes/dados, quais foram checadas pelo grupo e como (ex.: comparação com o que foi observado na visita de campo). |
