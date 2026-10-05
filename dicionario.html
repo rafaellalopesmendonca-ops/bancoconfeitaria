@@ -3,67 +3,112 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dicionário de Dados – Sistema da Confeitaria</title>
+<title>Dicionário de Dados – Sistema de Gestão de Confeitaria</title>
 <style>
-  :root{--bg:#fffaf5;--fg:#2b2220;--card:#fff;--ac:#b5446e;--bd:#e9d9d0;--th:#f6e3ea;--mut:#6f625d}
-  @media (prefers-color-scheme:dark){:root{--bg:#1e1819;--fg:#f1e8e4;--card:#2a2122;--ac:#f08ab0;--bd:#463a3b;--th:#3a2a30;--mut:#b9aaa4}}
+  :root{--bg:#fffaf5;--fg:#2b2220;--card:#fff;--ac:#b5446e;--bd:#e9d9d0;--th:#f6e3ea;--mut:#6f625d;--note:#fdf1f5}
+  @media (prefers-color-scheme:dark){:root{--bg:#1e1819;--fg:#f1e8e4;--card:#2a2122;--ac:#f08ab0;--bd:#463a3b;--th:#3a2a30;--mut:#b9aaa4;--note:#33262b}}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,Segoe UI,Arial,sans-serif;padding:24px;max-width:1100px;margin-inline:auto}
-  h1{color:var(--ac);margin:0 0 4px}
-  h2{color:var(--ac);border-bottom:2px solid var(--bd);padding-bottom:4px;margin-top:36px}
-  h3{margin:28px 0 6px}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,"Segoe UI",Arial,sans-serif;padding:24px;max-width:1100px;margin-inline:auto}
+  h1{color:var(--ac);margin:0 0 4px;font-size:28px;line-height:1.2}
+  h2{color:var(--ac);border-bottom:2px solid var(--bd);padding-bottom:4px;margin-top:40px}
+  h3{margin:32px 0 6px;font-size:19px;scroll-margin-top:12px}
   .sub{color:var(--mut);margin:0 0 20px}
   .card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 18px;margin:12px 0}
-  .wrap{overflow-x:auto}
+  .wrap{overflow-x:auto;margin:10px 0}
   table{border-collapse:collapse;width:100%;background:var(--card);font-size:14px}
   th,td{border:1px solid var(--bd);padding:7px 10px;text-align:left;vertical-align:top}
   th{background:var(--th)}
-  code,.formal{font-family:Consolas,monospace;font-size:13px}
-  .formal{background:var(--th);padding:8px 12px;border-radius:8px;display:block;overflow-x:auto;white-space:pre-wrap}
+  code,.formal{font-family:Consolas,"Courier New",monospace;font-size:13px}
+  .formal{background:var(--th);padding:8px 12px;border-radius:8px;display:block;overflow-x:auto;white-space:pre-wrap;word-break:break-word}
   .pk{color:var(--ac);font-weight:700}
+  .fk{font-style:italic}
+  .leitura{background:var(--note);border-left:4px solid var(--ac);padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0;font-size:14px}
   .idx{color:var(--mut);font-size:13px;margin-top:6px}
-  nav a{display:inline-block;margin:2px 8px 2px 0;color:var(--ac);text-decoration:none;font-size:14px}
-  nav a:hover{text-decoration:underline}
+  nav{margin:8px 0 4px}
+  nav a{display:inline-block;margin:2px 10px 2px 0;color:var(--ac);text-decoration:none;font-size:14px}
+  nav a:hover,nav a:focus-visible{text-decoration:underline}
+  a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
   ul{margin:6px 0 6px 20px;padding:0}
+  li{margin:3px 0}
+  .fluxo{font-size:14.5px}
+  .none{color:var(--mut)}
+  @media print{
+    body{background:#fff;color:#000;max-width:none;padding:0}
+    nav{display:none}
+    h3,.card,table{break-inside:avoid}
+  }
 </style>
 </head>
 <body>
 
 <h1>Dicionário de Dados – Sistema de Gestão de Confeitaria</h1>
-<p class="sub">Versão v1.0 · SGBD MySQL 8 (InnoDB) · utf8mb4 / utf8mb4_0900_ai_ci</p>
+<p class="sub">Versão v1.0 – 5 de outubro de 2026 – SGBD MySQL 8 (InnoDB) – utf8mb4 / utf8mb4_0900_ai_ci</p>
 
-<h2>1. Modelo conceitual</h2>
+<nav aria-label="Seções">
+  <a href="#s1">1. Modelo conceitual</a>
+  <a href="#s2">2. Fluxo de dados</a>
+  <a href="#s3">3. Convenções</a>
+  <a href="#s4">4. Dicionário por entidade</a>
+  <a href="#s5">5. Log de acesso</a>
+  <a href="#s6">6. Acesso e LGPD</a>
+  <a href="#s7">7. Observações sobre o DER</a>
+</nav>
+
+<h2 id="s1">1. Modelo conceitual</h2>
 <div class="card">
-  <p>O modelo representa uma confeitaria que recebe <b>pedidos</b> de <b>clientes</b>, registrados por <b>usuários</b> do sistema. Cada pedido possui itens (<b>produtos</b> organizados por <b>categoria</b>), cada item é associado a uma <b>receita</b> e os <b>insumos</b> necessários são controlados em <b>estoque</b> e <b>movimentação de estoque</b>, abastecidos por <b>fornecedores</b>. A parte <b>financeira</b> registra entradas e saídas e os <b>pagamentos</b> dos pedidos.</p>
+  <p>Este modelo representa uma confeitaria que recebe <b>pedidos</b> de <b>clientes</b>, registrados por <b>usuários</b> do sistema. Cada pedido possui itens (<b>produtos</b> organizados por <b>categoria</b>) e cada produto tem uma ou mais <b>receitas</b>. Os <b>insumos</b> necessários à produção são controlados em <b>estoque</b> e em <b>movimentação de estoque</b>, abastecidos por <b>fornecedores</b>. A parte <b>financeira</b> registra entradas e saídas e os <b>pagamentos</b> dos pedidos.</p>
+  <p><b>ITEM_PEDIDOS</b> é a entidade associativa entre PEDIDO e PRODUTO: um pedido contém vários produtos e um produto aparece em vários pedidos, e a quantidade e o preço praticado ficam registrados no item.</p>
 </div>
+
 <div class="wrap">
 <table>
   <thead><tr><th>Entidade</th><th>Relaciona-se com</th><th>Cardinalidade</th></tr></thead>
   <tbody>
-    <tr><td>USUARIO</td><td>PEDIDO</td><td>1:N — um usuário realiza vários pedidos</td></tr>
-    <tr><td>USUARIO</td><td>FINANCEIRO</td><td>1:N — um usuário possui vários lançamentos financeiros</td></tr>
+    <tr><td>USUARIO</td><td>PEDIDO</td><td>1:N — um usuário registra vários pedidos; cada pedido é registrado por um único usuário</td></tr>
+    <tr><td>USUARIO</td><td>FINANCEIRO</td><td>1:N — um usuário realiza vários lançamentos financeiros</td></tr>
     <tr><td>CLIENTE</td><td>PEDIDO</td><td>1:N — um cliente faz vários pedidos; cada pedido é de um único cliente</td></tr>
     <tr><td>PEDIDO</td><td>ITEM_PEDIDOS</td><td>1:N — um pedido possui um ou mais itens</td></tr>
-    <tr><td>ITEM_PEDIDOS</td><td>PRODUTO</td><td>N:1 — cada item refere-se a um produto</td></tr>
-    <tr><td>PRODUTO</td><td>CATEGORIA_PRODUTO</td><td>N:1 — um produto pertence a uma categoria</td></tr>
-    <tr><td>PRODUTO</td><td>RECEITA</td><td>1:N — um produto tem uma ou mais receitas (item de pedido "tem" receita)</td></tr>
-    <tr><td>PEDIDO</td><td>FINANCEIRO</td><td>1:N — um pedido pode gerar lançamentos financeiros</td></tr>
+    <tr><td>PRODUTO</td><td>ITEM_PEDIDOS</td><td>1:N — um produto pode constar em vários itens de pedido</td></tr>
+    <tr><td>CATEGORIA_PRODUTO</td><td>PRODUTO</td><td>1:N — uma categoria agrupa vários produtos; cada produto pertence a uma categoria</td></tr>
+    <tr><td>PRODUTO</td><td>RECEITA</td><td>1:N — um produto tem uma ou mais receitas</td></tr>
+    <tr><td>PEDIDO</td><td>FINANCEIRO</td><td>1:N opcional — um pedido pode gerar lançamentos; lançamentos de saída (compras) não têm pedido</td></tr>
     <tr><td>PEDIDO</td><td>PAGAMENTO</td><td>1:N — um pedido pode ser pago em um ou mais pagamentos</td></tr>
-    <tr><td>FINANCEIRO</td><td>PAGAMENTO</td><td>1:N — um lançamento financeiro possui pagamentos</td></tr>
-    <tr><td>INSUMO</td><td>ESTOQUE</td><td>1:N — um insumo possui registro de estoque</td></tr>
+    <tr><td>FINANCEIRO</td><td>PAGAMENTO</td><td>1:N opcional — um lançamento financeiro pode estar ligado a pagamentos</td></tr>
+    <tr><td>INSUMO</td><td>ESTOQUE</td><td>1:N — um insumo possui registro(s) de estoque</td></tr>
     <tr><td>INSUMO</td><td>MOVIMENTACAO_ESTOQUE</td><td>1:N — um insumo possui várias movimentações</td></tr>
-    <tr><td>FORNECEDORES</td><td>ESTOQUE</td><td>1:N — um fornecedor fornece vários itens de estoque</td></tr>
+    <tr><td>FORNECEDORES</td><td>ESTOQUE</td><td>1:N — um fornecedor abastece vários registros de estoque</td></tr>
   </tbody>
 </table>
 </div>
 
-<h2>2. Convenções do dicionário</h2>
 <div class="card">
+  <p><b>Definições das entidades</b></p>
   <ul>
-    <li><b>SGBD:</b> MySQL 8, InnoDB (transações, chaves estrangeiras e índice primário clusterizado).</li>
-    <li><b>Codificação:</b> utf8mb4 / utf8mb4_0900_ai_ci, para acentuação do português sem perda.</li>
-    <li><b>Prefixos:</b> NM_ nome · DT_ data · HR_ hora · ID_ identificador (sem operação matemática) · CD_ código de domínio · QT_ quantidade · TP_ tipo · IN_ indicador booleano · DS_ descrição/texto livre · VL_ valor monetário. <i>DS_, HR_ e VL_ não são prefixos-padrão, mas seguem o mesmo princípio.</i></li>
+    <li><b>Usuário</b> é a pessoa que acessa o sistema (administrador, atendente ou responsável pela produção).</li>
+    <li><b>Cliente</b> é a pessoa que encomenda produtos da confeitaria.</li>
+    <li><b>Pedido</b> é a encomenda registrada para um cliente, com data e horário combinados de entrega ou retirada.</li>
+    <li><b>Item de pedido</b> é cada produto solicitado dentro de um pedido, com sua quantidade e preço.</li>
+    <li><b>Produto</b> é o bolo, doce ou torta vendido pela confeitaria; a <b>categoria</b> agrupa produtos semelhantes.</li>
+    <li><b>Receita</b> é o registro de ingredientes e modo de preparo de um produto.</li>
+    <li><b>Insumo</b> é a matéria-prima, embalagem ou decoração usada na produção; <b>estoque</b> é o saldo atual de cada insumo e <b>movimentação de estoque</b> é o histórico de entradas e saídas.</li>
+    <li><b>Fornecedor</b> é a empresa ou pessoa que vende insumos para a confeitaria.</li>
+    <li><b>Financeiro</b> é o lançamento de entrada ou saída de dinheiro; <b>pagamento</b> é o valor efetivamente pago por um pedido.</li>
   </ul>
+</div>
+
+<h2 id="s2">2. Fluxo de dados (visão de DFD)</h2>
+<div class="card fluxo">
+  <p>Cliente faz a encomenda no balcão ou por mensagem → o atendente (USUARIO) consulta ou cadastra o cliente em CLIENTE → registra um PEDIDO e seus ITEM_PEDIDOS, escolhendo PRODUTOS do catálogo → a produção consulta a RECEITA de cada produto e consome INSUMOS, o que gera registros em MOVIMENTACAO_ESTOQUE e atualiza o saldo em ESTOQUE → quando o saldo fica abaixo de QT_ESTOQUE_MINIMO, o sistema alerta a necessidade de reposição junto ao FORNECEDOR → o cliente paga o pedido, gerando um ou mais PAGAMENTOS e o lançamento de entrada em FINANCEIRO → a compra de insumos gera um lançamento de saída em FINANCEIRO e uma movimentação de entrada em estoque → toda leitura ou escrita nas tabelas que guardam dados pessoais e financeiros é registrada pelo log de acesso do SGBD (§5), o que sustenta auditoria e conformidade com a LGPD (§6).</p>
+</div>
+
+<h2 id="s3">3. Convenções do dicionário</h2>
+<div class="card">
+  <p><b>SGBD:</b> MySQL 8, mecanismo de armazenamento InnoDB — cuida da persistência dos arquivos de dados, das transações com suporte a chaves estrangeiras, do log de transações (redo/undo) e mantém o índice primário clusterizado por chave.</p>
+  <p><b>Codificação de caracteres:</b> utf8mb4 com collation utf8mb4_0900_ai_ci. Escolhida em vez de latin1 por cobrir a acentuação do português sem perda em nomes e textos livres, e por aceitar qualquer caractere Unicode que apareça em observações de pedidos (por exemplo, emojis em dedicatórias).</p>
+  <p><b>Prefixos:</b> NM_ nome · DT_ data · HR_ hora · ID_ identificador (não sofre operação matemática) · CD_ código de domínio · QT_ quantidade · TP_ tipo (categorização) · IN_ indicador booleano. Este dicionário também usa <b>DS_</b> (descrição/texto livre) e <b>VL_</b> (valor monetário); não estão entre os sete prefixos-padrão, mas seguem o mesmo princípio.</p>
+  <p><b>Versão deste dicionário:</b> v1.0, 5/outubro/2026. Qualquer alteração de estrutura deve gerar nova revisão registrada nesta seção; a prática atende, ela própria, ao princípio de rastreabilidade exigido pela LGPD (art. 6º, X).</p>
+  <p><b>Notação formal</b> (símbolos usados neste dicionário):</p>
   <div class="wrap">
   <table>
     <thead><tr><th>Símbolo</th><th>Significado</th></tr></thead>
@@ -71,8 +116,9 @@
       <tr><td><code>=</code></td><td>é composto de</td></tr>
       <tr><td><code>+</code></td><td>e (conecta elementos obrigatórios)</td></tr>
       <tr><td><code>( )</code></td><td>opcional</td></tr>
-      <tr><td><code>{ }</code>, <code>n{ }m</code></td><td>iteração com limite mínimo n e máximo m</td></tr>
+      <tr><td><code>{ }</code>, <code>n{ }m</code></td><td>iteração, com limite mínimo n e máximo m</td></tr>
       <tr><td><code>[ | ]</code></td><td>escolha obrigatória entre alternativas</td></tr>
+      <tr><td><code>/ /</code></td><td>rótulo de um grupo repetitivo</td></tr>
       <tr><td><code>@</code></td><td>identificador (chave primária)</td></tr>
       <tr><td><code>* *</code></td><td>comentário, fora da estrutura formal</td></tr>
     </tbody>
@@ -80,19 +126,40 @@
   </div>
 </div>
 
-<h2>3. Dicionário de dados por entidade</h2>
-<nav id="nav"></nav>
+<h2 id="s4">4. Dicionário de dados por entidade</h2>
+<nav id="nav" aria-label="Entidades"></nav>
 <div id="entidades"></div>
 
-<h2>4. Observações sobre o DER</h2>
+<h2 id="s5">5. Log de acesso (metadado operacional)</h2>
+<div class="card">
+  <p>As tabelas que guardam dados pessoais e financeiros (USUARIO, CLIENTE, PEDIDO, FINANCEIRO e PAGAMENTO) ficam sob o mesmo mecanismo de auditoria do SGBD: o plugin <code>audit_log</code> do MySQL, configurado para gravar em formato JSON no caminho definido pela variável de sistema <code>audit_log_file</code>, em diretório com acesso restrito ao administrador do banco. Na ausência do plugin, a alternativa é o log geral (<code>general_log=ON</code>, <code>log_output=TABLE</code>), consultável em <code>mysql.general_log</code>.</p>
+  <p>Cada registro de auditoria guarda quem acessou (usuário do SGBD), quando, qual operação (leitura, inserção, atualização ou exclusão) e em qual tabela. Retenção e rotação do log seguem política própria, independente da retenção dos dados de negócio.</p>
+</div>
+
+<h2 id="s6">6. Acesso por operação e conformidade com a LGPD (metadado administrativo)</h2>
+<div class="wrap">
+<table>
+  <thead><tr><th>Tabela</th><th>LER</th><th>INSERIR</th><th>ATUALIZAR</th><th>APAGAR</th></tr></thead>
+  <tbody id="matriz"></tbody>
+</table>
+</div>
+<div class="card">
+  <p><b>Dados pessoais.</b> USUARIO, CLIENTE e FORNECEDORES (quando pessoa física) guardam dado pessoal comum (LGPD art. 5º, I): nome, telefone e endereço. <code>DS_SENHA</code> é credencial e só pode ser armazenada como hash. O tratamento de dados de cliente se ampara na execução do contrato de venda (art. 7º, V) e, para o registro financeiro, no cumprimento de obrigação legal (art. 7º, II).</p>
+  <p><b>Atenção a dado sensível.</b> O campo <code>DS_OBSERVACOES</code> de PEDIDO pode conter informação sobre alergias ou restrições alimentares, que é dado de saúde e portanto sensível (art. 5º, II). Por isso o acesso a ele é restrito aos papéis envolvidos no atendimento e na produção, e a coleta deve se limitar ao necessário para entregar o produto com segurança. <code>DS_FOTO_REFERENCIA</code> também exige cuidado caso a imagem contenha pessoas.</p>
+  <p><b>Responsabilização.</b> Toda consulta a essas tabelas fica registrada no log de acesso (§5), o que sustenta o princípio de responsabilização e prestação de contas (art. 6º, X).</p>
+  <p><b>Retenção.</b> Registros financeiros seguem o prazo legal de guarda fiscal e contábil (em geral, cinco anos). Encerrado o prazo, ou a pedido do titular quando não houver obrigação legal de guarda, os dados pessoais são anonimizados — nunca apagados fisicamente de pedidos e lançamentos — preservando a estatística de vendas sem identificar o cliente. Usuários que deixam a empresa são inativados (<code>IN_ATIVO</code>), nunca excluídos, para manter a trilha de quem registrou cada pedido.</p>
+</div>
+
+<h2 id="s7">7. Observações sobre o DER</h2>
 <div class="card">
   <p>Pontos do diagrama que foram interpretados ou ajustados neste dicionário (recomenda-se corrigir o DER para ficar consistente):</p>
   <ul>
     <li><b>ITEM_PEDIDOS:</b> no diagrama os atributos repetem os de PEDIDO (id_pedidos, id_clientes, datas e hora). Aqui foram substituídos por atributos próprios de um item (produto, quantidade, preço unitário).</li>
-    <li><b>ESTOQUE:</b> o diagrama traz id_cliente, nome, telefone e endereço, que pertencem a CLIENTE/FORNECEDORES. Aqui o estoque guarda saldo do insumo e o fornecedor.</li>
+    <li><b>ESTOQUE:</b> o diagrama traz id_cliente, nome, telefone e endereço, que pertencem a CLIENTE/FORNECEDORES. Aqui o estoque guarda o saldo do insumo e o fornecedor.</li>
     <li><b>FORNECEDORES:</b> no diagrama não há chave primária; foi adicionado ID_FORNECEDOR.</li>
-    <li><b>Nomes:</b> os atributos foram padronizados com prefixos e no singular (ex.: <code>data_pedidos</code> → <code>DT_PEDIDO</code>).</li>
-    <li><b>Segurança:</b> <code>DS_SENHA</code> deve ser armazenada somente como hash (ex.: bcrypt/argon2), nunca em texto puro.</li>
+    <li><b>RECEITA e INSUMO:</b> o diagrama não liga receita a insumo, então o sistema não sabe quanto de cada insumo um produto consome. Uma melhoria futura é criar a entidade associativa RECEITA_INSUMO (ID_RECEITA, ID_INSUMO, QT_INSUMO) para dar baixa automática no estoque.</li>
+    <li><b>Nomes:</b> os atributos foram padronizados com prefixos e no singular (ex.: <code>data_pedidos</code> → <code>DT_PEDIDO</code>). Os nomes de entidade ITEM_PEDIDOS e FORNECEDORES foram mantidos como no DER.</li>
+    <li><b>Segurança:</b> <code>DS_SENHA</code> deve ser armazenada somente como hash (ex.: bcrypt ou argon2), nunca em texto puro.</li>
   </ul>
 </div>
 
@@ -101,117 +168,126 @@ const E = [
 {
   nome:"USUARIO", desc:"Pessoa que acessa o sistema (atendente, confeiteiro, administrador).",
   formal:"USUARIO = @ID_USUARIO + NM_USUARIO + DS_LOGIN + DS_SENHA + CD_NIVEL_ACESSO + IN_ATIVO",
+  leitura:"Os cinco campos após o identificador são obrigatórios e conectados por +. CD_NIVEL_ACESSO usa o prefixo de código de domínio porque seus valores vêm de uma lista fixa (1, 2, 3), e não de um cadastro livre.",
   attrs:[
-    ["ID_USUARIO","int AUTO_INCREMENT","Sim (PK)","Identificador do usuário."],
-    ["NM_USUARIO","varchar(120)","Sim","Nome completo do usuário."],
-    ["DS_LOGIN","varchar(50)","Sim (único)","Login de acesso ao sistema."],
-    ["DS_SENHA","varchar(255)","Sim","Hash da senha."],
-    ["CD_NIVEL_ACESSO","tinyint","Sim","Perfil de permissão (ex.: 1 = administrador, 2 = atendente, 3 = produção)."],
-    ["IN_ATIVO","boolean","Sim","Indica se o usuário está ativo; inativo não acessa o sistema, mas mantém o histórico."]
+    ["ID_USUARIO","int AUTO_INCREMENT","Sim (PK)","Código de localização do registro; não sofre operação matemática."],
+    ["NM_USUARIO","varchar(120)","Sim","Nome completo do usuário; identifica quem registrou cada pedido e lançamento financeiro."],
+    ["DS_LOGIN","varchar(50)","Sim (único)","Login de acesso ao sistema; a unicidade evita dois usuários com a mesma identidade."],
+    ["DS_SENHA","varchar(255)","Sim","Hash da senha (bcrypt ou argon2); nunca armazenada em texto puro."],
+    ["CD_NIVEL_ACESSO","tinyint","Sim","Perfil de permissão (1 = administrador, 2 = atendente, 3 = produção); define o que o usuário pode ler e alterar (§6)."],
+    ["IN_ATIVO","boolean","Sim","Indica se o usuário está ativo; usuário inativo não acessa o sistema, mas mantém o histórico dos pedidos que registrou."]
   ],
-  idx:"PK ID_USUARIO; índice único em DS_LOGIN."
+  idx:"PK ID_USUARIO; índice único em DS_LOGIN (agiliza a autenticação e evita duplicidade)."
 },
 {
   nome:"CLIENTE", desc:"Pessoa que encomenda produtos da confeitaria.",
   formal:"CLIENTE = @ID_CLIENTE + NM_CLIENTE + DS_TELEFONE + (DS_ENDERECO)",
+  leitura:"DS_TELEFONE é obrigatório porque é o canal para combinar detalhes da encomenda; (DS_ENDERECO) vem entre ( ) porque só é necessário quando há entrega, e retirada no balcão dispensa o endereço.",
   attrs:[
-    ["ID_CLIENTE","int AUTO_INCREMENT","Sim (PK)","Identificador do cliente."],
-    ["NM_CLIENTE","varchar(120)","Sim","Nome do cliente."],
-    ["DS_TELEFONE","varchar(20)","Sim","Telefone/WhatsApp de contato."],
-    ["DS_ENDERECO","varchar(255)","Não","Endereço para entrega."]
+    ["ID_CLIENTE","int AUTO_INCREMENT","Sim (PK)","Código de localização do cliente; não sofre operação matemática."],
+    ["NM_CLIENTE","varchar(120)","Sim","Nome do cliente; usado no atendimento e na identificação do pedido."],
+    ["DS_TELEFONE","varchar(20)","Sim","Telefone/WhatsApp de contato para confirmar detalhes e avisar que o pedido está pronto."],
+    ["DS_ENDERECO","varchar(255)","Não","Endereço para entrega; preenchido apenas quando o pedido não é retirado no local."]
   ],
   idx:"PK ID_CLIENTE; índice secundário em NM_CLIENTE (busca por nome no atendimento)."
 },
 {
   nome:"PEDIDO", desc:"Encomenda feita por um cliente e registrada por um usuário.",
   formal:"PEDIDO = @ID_PEDIDO + ID_CLIENTE + ID_USUARIO + DT_PEDIDO + DT_ENTREGA + HR_ENTREGA + [TP_PENDENTE | TP_EM_PRODUCAO | TP_PRONTO | TP_ENTREGUE | TP_CANCELADO] + VL_TOTAL + (DS_OBSERVACOES) + (DS_FOTO_REFERENCIA)",
+  leitura:"ID_CLIENTE e ID_USUARIO são obrigatórios e ligam o pedido a quem comprou e a quem registrou; [ | ] exige escolher exatamente uma situação do pedido; as observações e a foto de referência vêm entre ( ) porque nem todo pedido os possui.",
   attrs:[
-    ["ID_PEDIDO","int AUTO_INCREMENT","Sim (PK)","Identificador do pedido."],
+    ["ID_PEDIDO","int AUTO_INCREMENT","Sim (PK)","Identificador do pedido; é o número usado para acompanhar a encomenda."],
     ["ID_CLIENTE","int","Sim (FK)","Cliente dono do pedido (CLIENTE)."],
-    ["ID_USUARIO","int","Sim (FK)","Usuário que registrou o pedido (USUARIO)."],
+    ["ID_USUARIO","int","Sim (FK)","Usuário que registrou o pedido (USUARIO); garante rastreabilidade do atendimento."],
     ["DT_PEDIDO","date","Sim","Data em que o pedido foi feito."],
-    ["DT_ENTREGA","date","Sim","Data combinada para entrega/retirada."],
-    ["HR_ENTREGA","time","Sim","Horário combinado para entrega/retirada."],
-    ["TP_STATUS","varchar(20)","Sim (escolha)","Situação: pendente, em produção, pronto, entregue ou cancelado."],
-    ["VL_TOTAL","decimal(10,2)","Sim","Valor total do pedido (soma dos itens)."],
-    ["DS_OBSERVACOES","text","Não","Observações do pedido (tema, dedicatória, alergias, etc.)."],
-    ["DS_FOTO_REFERENCIA","varchar(255)","Não","Caminho/URL da foto de referência do bolo ou doce."]
+    ["DT_ENTREGA","date","Sim","Data combinada para entrega ou retirada; base da agenda de produção."],
+    ["HR_ENTREGA","time","Sim","Horário combinado para entrega ou retirada."],
+    ["TP_PENDENTE | TP_EM_PRODUCAO | TP_PRONTO | TP_ENTREGUE | TP_CANCELADO","varchar(20)","Sim (escolha)","Situação do pedido (pendente, em produção, pronto, entregue ou cancelado); orienta a fila de produção e os relatórios. Pedido cancelado mantém o histórico."],
+    ["VL_TOTAL","decimal(10,2)","Sim","Valor total do pedido (soma dos itens); referência para conferir os pagamentos."],
+    ["DS_OBSERVACOES","text","Não","Observações do pedido (tema, dedicatória, alergias etc.). Pode conter dado de saúde, portanto sensível (§6)."],
+    ["DS_FOTO_REFERENCIA","varchar(255)","Não","Caminho ou URL da foto de referência do bolo ou doce desejado."]
   ],
   idx:"PK ID_PEDIDO; índices em ID_CLIENTE, ID_USUARIO e DT_ENTREGA (agenda de entregas)."
 },
 {
-  nome:"ITEM_PEDIDOS", desc:"Produto solicitado dentro de um pedido.",
+  nome:"ITEM_PEDIDOS", desc:"Produto solicitado dentro de um pedido (entidade associativa entre PEDIDO e PRODUTO).",
   formal:"ITEM_PEDIDOS = @ID_ITEM_PEDIDO + ID_PEDIDO + ID_PRODUTO + QT_ITEM + VL_UNITARIO",
+  leitura:"Todos os campos são obrigatórios: um item só existe se houver pedido, produto, quantidade e preço. VL_UNITARIO é guardado no item para que mudanças futuras no preço base não alterem pedidos antigos.",
   attrs:[
     ["ID_ITEM_PEDIDO","int AUTO_INCREMENT","Sim (PK)","Identificador do item."],
     ["ID_PEDIDO","int","Sim (FK)","Pedido ao qual o item pertence (PEDIDO)."],
     ["ID_PRODUTO","int","Sim (FK)","Produto solicitado (PRODUTO)."],
-    ["QT_ITEM","int","Sim","Quantidade solicitada."],
-    ["VL_UNITARIO","decimal(10,2)","Sim","Preço unitário no momento do pedido (pode diferir do preço base)."]
+    ["QT_ITEM","int","Sim","Quantidade solicitada do produto; deve ser maior que zero."],
+    ["VL_UNITARIO","decimal(10,2)","Sim","Preço unitário no momento do pedido (pode diferir do preço base); preserva o histórico de vendas."]
   ],
   idx:"PK ID_ITEM_PEDIDO; índices em ID_PEDIDO e ID_PRODUTO."
 },
 {
   nome:"PRODUTO", desc:"Bolo, doce ou torta vendido pela confeitaria.",
   formal:"PRODUTO = @ID_PRODUTO + ID_CATEGORIA + NM_PRODUTO + (DS_PRODUTO) + (DS_TAMANHO) + (QT_PESSOAS) + VL_PRECO_BASE + IN_ATIVO",
+  leitura:"Nome, categoria, preço base e indicador de ativo são obrigatórios; descrição, tamanho e quantidade de pessoas vêm entre ( ) porque nem todo produto (por exemplo, um brigadeiro avulso) tem esses dados.",
   attrs:[
     ["ID_PRODUTO","int AUTO_INCREMENT","Sim (PK)","Identificador do produto."],
     ["ID_CATEGORIA","int","Sim (FK)","Categoria do produto (CATEGORIA_PRODUTO)."],
-    ["NM_PRODUTO","varchar(100)","Sim","Nome do produto."],
-    ["DS_PRODUTO","text","Não","Descrição do produto."],
+    ["NM_PRODUTO","varchar(100)","Sim","Nome do produto, como aparece no catálogo e no pedido."],
+    ["DS_PRODUTO","text","Não","Descrição do produto (recheio, cobertura, sabor)."],
     ["DS_TAMANHO","varchar(30)","Não","Tamanho (ex.: P, M, G, 20 cm)."],
-    ["QT_PESSOAS","int","Não","Quantidade de pessoas que o produto serve."],
-    ["VL_PRECO_BASE","decimal(10,2)","Sim","Preço base de venda."],
-    ["IN_ATIVO","boolean","Sim","Indica se o produto está disponível no catálogo."]
+    ["QT_PESSOAS","int","Não","Quantidade de pessoas que o produto serve; ajuda o cliente a escolher o tamanho."],
+    ["VL_PRECO_BASE","decimal(10,2)","Sim","Preço base de venda; é sugerido ao registrar o item, mas pode ser ajustado."],
+    ["IN_ATIVO","boolean","Sim","Indica se o produto está disponível no catálogo; produto inativo some da venda sem perder o histórico."]
   ],
   idx:"PK ID_PRODUTO; índices em ID_CATEGORIA e NM_PRODUTO."
 },
 {
   nome:"CATEGORIA_PRODUTO", desc:"Agrupamento de produtos (ex.: bolos, doces, tortas).",
   formal:"CATEGORIA_PRODUTO = @ID_CATEGORIA + NM_CATEGORIA + (DS_CATEGORIA) + IN_ATIVO",
+  leitura:"NM_CATEGORIA é obrigatório e único, para não existirem duas categorias com o mesmo nome; a descrição é opcional.",
   attrs:[
     ["ID_CATEGORIA","int AUTO_INCREMENT","Sim (PK)","Identificador da categoria."],
-    ["NM_CATEGORIA","varchar(80)","Sim (único)","Nome da categoria."],
+    ["NM_CATEGORIA","varchar(80)","Sim (único)","Nome da categoria; usado em filtros do catálogo e em relatórios de venda."],
     ["DS_CATEGORIA","varchar(255)","Não","Descrição da categoria."],
     ["IN_ATIVO","boolean","Sim","Indica se a categoria está ativa."]
   ],
   idx:"PK ID_CATEGORIA; índice único em NM_CATEGORIA."
 },
 {
-  nome:"RECEITA", desc:"Modo de preparo/composição de um produto.",
+  nome:"RECEITA", desc:"Modo de preparo e composição de um produto.",
   formal:"RECEITA = @ID_RECEITA + ID_PRODUTO + NM_RECEITA + (DS_RECEITA)",
+  leitura:"ID_PRODUTO é obrigatório porque toda receita pertence a um produto; um produto pode ter mais de uma receita (por exemplo, massa e recheio). DS_RECEITA é opcional porque a receita pode ser cadastrada apenas pelo nome e detalhada depois.",
   attrs:[
     ["ID_RECEITA","int AUTO_INCREMENT","Sim (PK)","Identificador da receita."],
     ["ID_PRODUTO","int","Sim (FK)","Produto ao qual a receita se refere (PRODUTO)."],
-    ["NM_RECEITA","varchar(100)","Sim","Nome da receita."],
-    ["DS_RECEITA","text","Não","Ingredientes e modo de preparo."]
+    ["NM_RECEITA","varchar(100)","Sim","Nome da receita (ex.: massa de chocolate, recheio de brigadeiro)."],
+    ["DS_RECEITA","text","Não","Ingredientes e modo de preparo; consultada pela produção."]
   ],
   idx:"PK ID_RECEITA; índice em ID_PRODUTO."
 },
 {
-  nome:"FINANCEIRO", desc:"Lançamento financeiro (entrada ou saída) ligado a um pedido e a um usuário.",
+  nome:"FINANCEIRO", desc:"Lançamento financeiro (entrada ou saída) feito por um usuário e, quando for o caso, ligado a um pedido.",
   formal:"FINANCEIRO = @ID_FINANCEIRO + ID_USUARIO + (ID_PEDIDO) + [TP_ENTRADA | TP_SAIDA] + (DS_FINANCEIRO) + VL_FINANCEIRO + DT_MOVIMENTACAO + TP_FORMA_PAGAMENTO",
+  leitura:"(ID_PEDIDO) é opcional porque saídas, como a compra de insumos, não têm pedido; [TP_ENTRADA | TP_SAIDA] exige escolher exatamente um tipo de lançamento; a descrição é opcional.",
   attrs:[
     ["ID_FINANCEIRO","int AUTO_INCREMENT","Sim (PK)","Identificador do lançamento."],
     ["ID_USUARIO","int","Sim (FK)","Usuário que realizou o lançamento (USUARIO)."],
-    ["ID_PEDIDO","int","Não (FK)","Pedido relacionado (saídas, como compras, podem não ter pedido)."],
-    ["TP_FINANCEIRO","varchar(10)","Sim (escolha)","Tipo do lançamento: entrada ou saída."],
-    ["DS_FINANCEIRO","varchar(255)","Não","Descrição do lançamento."],
-    ["VL_FINANCEIRO","decimal(10,2)","Sim","Valor do lançamento."],
-    ["DT_MOVIMENTACAO","date","Sim","Data da movimentação."],
-    ["TP_FORMA_PAGAMENTO","varchar(30)","Sim","Forma de pagamento (dinheiro, Pix, cartão, etc.)."]
+    ["ID_PEDIDO","int","Não (FK)","Pedido relacionado; vazio nas saídas que não dependem de pedido."],
+    ["TP_ENTRADA | TP_SAIDA","varchar(10)","Sim (escolha)","Tipo do lançamento: entrada (receita) ou saída (despesa); base do fluxo de caixa."],
+    ["DS_FINANCEIRO","varchar(255)","Não","Descrição do lançamento (ex.: compra de chocolate, sinal do pedido 120)."],
+    ["VL_FINANCEIRO","decimal(10,2)","Sim","Valor do lançamento; sempre positivo, o sinal é dado pelo tipo."],
+    ["DT_MOVIMENTACAO","date","Sim","Data da movimentação; usada em relatórios por período."],
+    ["TP_FORMA_PAGAMENTO","varchar(30)","Sim","Forma de pagamento (dinheiro, Pix, cartão etc.)."]
   ],
   idx:"PK ID_FINANCEIRO; índices em ID_USUARIO, ID_PEDIDO e DT_MOVIMENTACAO (relatórios por período)."
 },
 {
   nome:"PAGAMENTO", desc:"Pagamento efetuado para um pedido.",
   formal:"PAGAMENTO = @ID_PAGAMENTO + ID_PEDIDO + (ID_FINANCEIRO) + VL_PAGAMENTO + TP_FORMA_PAGAMENTO + DT_PAGAMENTO",
+  leitura:"Um pedido pode ter vários pagamentos (por exemplo, sinal e restante), por isso a ligação é por ID_PEDIDO e não o contrário; (ID_FINANCEIRO) é opcional porque o lançamento pode ser gerado depois do pagamento.",
   attrs:[
     ["ID_PAGAMENTO","int AUTO_INCREMENT","Sim (PK)","Identificador do pagamento."],
     ["ID_PEDIDO","int","Sim (FK)","Pedido pago (PEDIDO)."],
     ["ID_FINANCEIRO","int","Não (FK)","Lançamento financeiro gerado (FINANCEIRO)."],
-    ["VL_PAGAMENTO","decimal(10,2)","Sim","Valor pago."],
-    ["TP_FORMA_PAGAMENTO","varchar(30)","Sim","Forma de pagamento (dinheiro, Pix, cartão, etc.)."],
+    ["VL_PAGAMENTO","decimal(10,2)","Sim","Valor pago; a soma dos pagamentos confere com VL_TOTAL do pedido."],
+    ["TP_FORMA_PAGAMENTO","varchar(30)","Sim","Forma de pagamento (dinheiro, Pix, cartão etc.)."],
     ["DT_PAGAMENTO","date","Sim","Data do pagamento."]
   ],
   idx:"PK ID_PAGAMENTO; índices em ID_PEDIDO e DT_PAGAMENTO."
@@ -219,37 +295,40 @@ const E = [
 {
   nome:"INSUMO", desc:"Matéria-prima usada na produção (farinha, ovos, chocolate, embalagens...).",
   formal:"INSUMO = @ID_INSUMO + NM_INSUMO + (DS_CATEGORIA) + TP_UNIDADE_MEDIDA + (TP_INSUMO) + QT_ESTOQUE_MINIMO + IN_ATIVO",
+  leitura:"Nome, unidade de medida, estoque mínimo e indicador de ativo são obrigatórios; categoria e tipo vêm entre ( ) porque podem ser classificados depois do cadastro.",
   attrs:[
     ["ID_INSUMO","int AUTO_INCREMENT","Sim (PK)","Identificador do insumo."],
     ["NM_INSUMO","varchar(100)","Sim","Nome do insumo."],
     ["DS_CATEGORIA","varchar(60)","Não","Categoria do insumo (ex.: laticínios, secos, embalagens)."],
-    ["TP_UNIDADE_MEDIDA","varchar(10)","Sim","Unidade de medida (kg, g, L, ml, un)."],
+    ["TP_UNIDADE_MEDIDA","varchar(10)","Sim","Unidade de medida (kg, g, L, ml, un); define como as quantidades de estoque são lidas."],
     ["TP_INSUMO","varchar(30)","Não","Tipo do insumo (ingrediente, embalagem, decoração)."],
     ["QT_ESTOQUE_MINIMO","decimal(10,3)","Sim","Quantidade mínima antes de gerar alerta de reposição."],
-    ["IN_ATIVO","boolean","Sim","Indica se o insumo está ativo."]
+    ["IN_ATIVO","boolean","Sim","Indica se o insumo está ativo; insumo inativo não aparece para compra, mas mantém o histórico."]
   ],
   idx:"PK ID_INSUMO; índice em NM_INSUMO."
 },
 {
   nome:"ESTOQUE", desc:"Saldo atual de cada insumo, com o fornecedor associado.",
   formal:"ESTOQUE = @ID_ESTOQUE + ID_INSUMO + ID_FORNECEDOR + QT_ATUAL",
+  leitura:"Todos os campos são obrigatórios: cada registro informa qual insumo, de qual fornecedor e quanto há disponível. QT_ATUAL é atualizada a cada MOVIMENTACAO_ESTOQUE.",
   attrs:[
     ["ID_ESTOQUE","int AUTO_INCREMENT","Sim (PK)","Identificador do registro de estoque."],
     ["ID_INSUMO","int","Sim (FK)","Insumo controlado (INSUMO)."],
-    ["ID_FORNECEDOR","int","Sim (FK)","Fornecedor do insumo (FORNECEDORES)."],
-    ["QT_ATUAL","decimal(10,3)","Sim","Quantidade atual disponível."]
+    ["ID_FORNECEDOR","int","Sim (FK)","Fornecedor do insumo (FORNECEDORES); indica onde repor."],
+    ["QT_ATUAL","decimal(10,3)","Sim","Quantidade atual disponível; comparada com QT_ESTOQUE_MINIMO para alertar reposição."]
   ],
   idx:"PK ID_ESTOQUE; índices em ID_INSUMO e ID_FORNECEDOR."
 },
 {
   nome:"MOVIMENTACAO_ESTOQUE", desc:"Entrada ou saída de insumos do estoque.",
   formal:"MOVIMENTACAO_ESTOQUE = @ID_MOVIMENTACAO + ID_INSUMO + [TP_ENTRADA | TP_SAIDA] + QT_MOVIMENTACAO + DT_MOVIMENTACAO + (DS_MOTIVO)",
+  leitura:"[TP_ENTRADA | TP_SAIDA] exige escolher exatamente um sentido da movimentação; o motivo é opcional, mas recomendado para perdas e ajustes.",
   attrs:[
     ["ID_MOVIMENTACAO","int AUTO_INCREMENT","Sim (PK)","Identificador da movimentação."],
     ["ID_INSUMO","int","Sim (FK)","Insumo movimentado (INSUMO)."],
-    ["TP_MOVIMENTACAO","varchar(10)","Sim (escolha)","Tipo da movimentação: entrada ou saída."],
-    ["QT_MOVIMENTACAO","decimal(10,3)","Sim","Quantidade movimentada."],
-    ["DT_MOVIMENTACAO","datetime","Sim","Data e hora da movimentação."],
+    ["TP_ENTRADA | TP_SAIDA","varchar(10)","Sim (escolha)","Tipo da movimentação: entrada (compra, devolução) ou saída (uso, perda)."],
+    ["QT_MOVIMENTACAO","decimal(10,3)","Sim","Quantidade movimentada, na unidade do insumo; sempre positiva."],
+    ["DT_MOVIMENTACAO","datetime","Sim","Data e hora da movimentação; permite auditar o consumo."],
     ["DS_MOTIVO","varchar(255)","Não","Motivo (compra, uso em produção, perda, ajuste)."]
   ],
   idx:"PK ID_MOVIMENTACAO; índices em ID_INSUMO e DT_MOVIMENTACAO."
@@ -257,9 +336,10 @@ const E = [
 {
   nome:"FORNECEDORES", desc:"Empresa ou pessoa que fornece insumos.",
   formal:"FORNECEDORES = @ID_FORNECEDOR + NM_FORNECEDOR + DS_TELEFONE + (DS_ENDERECO)",
+  leitura:"Nome e telefone são obrigatórios para que seja possível fazer o pedido de reposição; o endereço é opcional porque muitos fornecedores entregam e dispensam a visita.",
   attrs:[
     ["ID_FORNECEDOR","int AUTO_INCREMENT","Sim (PK)","Identificador do fornecedor (não consta no DER)."],
-    ["NM_FORNECEDOR","varchar(120)","Sim","Nome do fornecedor."],
+    ["NM_FORNECEDOR","varchar(120)","Sim","Nome ou razão social do fornecedor."],
     ["DS_TELEFONE","varchar(20)","Sim","Telefone de contato."],
     ["DS_ENDERECO","varchar(255)","Não","Endereço do fornecedor."]
   ],
@@ -267,20 +347,48 @@ const E = [
 }
 ];
 
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const nav = document.getElementById('nav');
 const box = document.getElementById('entidades');
 E.forEach(e=>{
   nav.insertAdjacentHTML('beforeend', `<a href="#${e.nome}">${e.nome}</a>`);
-  const rows = e.attrs.map(a=>`<tr><td>${a[2].includes('PK')?'<span class="pk">'+a[0]+'</span>':a[0]}</td><td>${a[1]}</td><td>${a[2]}</td><td>${a[3]}</td></tr>`).join('');
+  const rows = e.attrs.map(a=>{
+    let n = esc(a[0]);
+    if(a[2].includes('PK')) n = `<span class="pk">${n}</span>`;
+    else if(a[2].includes('FK')) n = `<span class="fk">${n}</span>`;
+    return `<tr><td>${n}</td><td>${esc(a[1])}</td><td>${esc(a[2])}</td><td>${esc(a[3])}</td></tr>`;
+  }).join('');
   box.insertAdjacentHTML('beforeend', `
     <h3 id="${e.nome}">${e.nome}</h3>
-    <p>${e.desc}</p>
-    <code class="formal">${e.formal.replace(/</g,'&lt;')}</code>
+    <p>${esc(e.desc)}</p>
+    <code class="formal">${esc(e.formal)}</code>
+    <div class="leitura"><b>Leitura:</b> ${esc(e.leitura)}</div>
     <div class="wrap"><table>
       <thead><tr><th>Atributo</th><th>Tipo físico</th><th>Obrigatório</th><th>Significado e relevância</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
-    <div class="idx"><b>Índices:</b> ${e.idx}</div>`);
+    <div class="idx"><b>Índices:</b> ${esc(e.idx)}</div>`);
+});
+
+const N = '<span class="none">Nenhum papel</span>';
+const M = [
+ ["USUARIO","Administrador","Administrador","Administrador (o próprio usuário altera a senha)", N+" — inativa-se com IN_ATIVO"],
+ ["CLIENTE","Atendente, Administrador","Atendente","Atendente",N+" — anonimização ao fim da retenção"],
+ ["PEDIDO","Atendente, Produção, Administrador","Atendente","Atendente (situação também pela Produção)",N+" — cancela-se pela situação"],
+ ["ITEM_PEDIDOS","Atendente, Produção, Administrador","Atendente","Atendente (enquanto o pedido estiver pendente)",N+" — corrige-se com novo item"],
+ ["PRODUTO","Todos os papéis","Administrador","Administrador",N+" — inativa-se com IN_ATIVO"],
+ ["CATEGORIA_PRODUTO","Todos os papéis","Administrador","Administrador",N+" — inativa-se com IN_ATIVO"],
+ ["RECEITA","Produção, Administrador","Produção, Administrador","Produção, Administrador","Administrador"],
+ ["FINANCEIRO","Administrador","Administrador, Atendente (entradas)",N+" — estorno gera novo lançamento",N],
+ ["PAGAMENTO","Atendente, Administrador","Atendente",N+" — estorno gera novo registro",N],
+ ["INSUMO","Produção, Administrador","Administrador","Administrador",N+" — inativa-se com IN_ATIVO"],
+ ["ESTOQUE","Produção, Administrador","Sistema (ao cadastrar insumo)","Sistema (a partir das movimentações)",N],
+ ["MOVIMENTACAO_ESTOQUE","Produção, Administrador","Produção, Administrador",N+" — ajuste gera nova movimentação",N],
+ ["FORNECEDORES","Administrador, Produção","Administrador","Administrador",N+" — anonimização ao fim da retenção"]
+];
+const mt = document.getElementById('matriz');
+M.forEach(r=>{
+  mt.insertAdjacentHTML('beforeend', `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`);
 });
 </script>
 </body>
