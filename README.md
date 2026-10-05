@@ -154,14 +154,46 @@ Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc
 
 | **Ferramenta e etapa** | Qual IA foi usada e em qual parte do trabalho: CHATGPT PARA FUNCIONALIDADES DO SITE
 | **Motivação**: POIS TINHAMOS DÚVIDAS REFERENTES AOS FUNCIONALIDADES DO SITE, PRINCIPALMENTE A VISUALIZAÇÃO.
-| **Prompt(s) utilizados** | Texto exato (ou muito próximo) do que foi perguntado/pedido à IA. |
-| **Resposta recebida** | Resumo ou trecho relevante da resposta da IA. |
-| **Fontes consultadas e verificadas** | Se a IA citou fontes/dados, quais foram checadas pelo grupo e como (ex.: comparação com o que foi observado na visita de campo). |
-| **Trechos rejeitados ou corrigidos** | O que da resposta da IA foi descartado, editado ou corrigido manualmente, e por quê. |
-| **Justificativa da escolha final** | Por que o grupo manteve, adaptou ou rejeitou o que a IA sugeriu. |
-| **Reflexão crítica** | Limites, vieses ou erros identificados no uso da IA nessa etapa (ex.: informação desatualizada, alucinação, generalização incorreta sobre o tipo de organização). |
+| **Prompt(s) utilizados** 
+    box-shadow:
+        0 5px 20px rgba(100, 45, 45, 0.08);
 
-*Se o grupo não usou nenhuma ferramenta de IA, declare isso explicitamente nesta seção.*
+        .frase-decorativa {
+    width: 220px;
+
+    align-self: center;
+
+    text-align: center;
+
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
+
+    font-size: 21px;
+
+    color: #87545b;
+
+    transform: rotate(-3deg);
+
+    padding: 20px;
+}
+
+.conteudo-secao h2::after {
+    content: " ♥";
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    color: #d96e88;
+}
+
+
+| **Fontes consultadas e verificadas** USAMOS A IA APENAS PARA A FUNCIONALIDADE DO SITE E A DECORAÇÃO, A PARTE REFERENTE AO BANCO DE DADOS, FOI FEITA SEM IA 
+| **Trechos rejeitados ou corrigidos** DER COM LETRAS E SIMBOLOS INELEGIVEIS 
+| **Reflexão crítica** | LIMITAÇÃO NAS IMAGENS, ALUCINAÇÃO DA IA (APARECIMENTO DE PALAVRAS EM INGLES NO DER NO QUE DEVERIA SER EM PORTUGUÊS)
+
 
 ---
 
