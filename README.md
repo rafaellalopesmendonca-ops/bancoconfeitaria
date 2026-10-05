@@ -1,218 +1,346 @@
-# Entrega 1 — Modelo Conceitual (DER)
-### Modelagem de um sistema de gestão de informações para uma organização de pequeno porte
+# Sweet Thuty — Modelo Conceitual (DER)
 
-> Este arquivo é o esqueleto do **README.md** do repositório GitHub do seu grupo.
-> Preencha cada seção abaixo. Não apague os títulos — apenas substitua as instruções em *itálico* pelo conteúdo do seu projeto.
-> O **DER** é anexado separadamente ao repositório (em imagem), mas sua justificativa entra neste README.
->
-> **A organização escolhida pode ser de qualquer natureza:** empresa com fins lucrativos (livraria, lanchonete, pet shop), ONG, associação comunitária, cooperativa, instituições religiosas/comunitárias como igrejas, terreiros de religiões de matriz africana (candomblé, umbanda) ou outras. O que muda de um tipo para outro são os processos e as regras específicas — a estrutura do trabalho (levantamento de requisitos, modelagem conceitual, DER) é a mesma para todas. Termos como "empresa" e "negócio" usados abaixo devem ser lidos de forma ampla, no sentido técnico de modelagem de dados (ex.: "regras de negócio" = regras de funcionamento da organização, seja ela comercial, religiosa ou social).
->
-> **Importante:** a organização precisa **existir de fato** — não é permitido inventar uma organização fictícia. O levantamento de requisitos e regras de negócio deve ser feito por meio de **pesquisa de campo na própria organização** (visitas, entrevistas com responsáveis, observação dos processos reais), então o grupo só deve escolher uma organização à qual **realmente tenha acesso**. Ao escolher, tomem cuidado com o porte: **nem tão pequena** que não gere dados suficiente para o trabalho (poucos processos, poucas entidades), **nem tão grande/complexa** que fique inviável de modelar nesta primeira etapa do curso.
-
----
+Modelagem de um sistema de gestão de informações para uma confeitaria de pequeno porte.
 
 ## Metadados
 
-- **Nomes dos alunos e RGM**
+**Integrantes do grupo**
 
-- David Mota Marques RGM: 47753251
-- Lucas Ronaldo Gasparotto Machado RGM: 47297166
-- Luiz Paulo Alves Souza Coelho Freitas RGM: 47779829
-- Rafaella Lopes Mendonça Tolentino RGM: 48033863
+| Nome | RGM |
+|------|-----|
+| David Mota Marques | 47753251 |
+| Lucas Ronaldo Gasparotto Machado | 47297166 |
+| Luiz Paulo Alves Souza Coelho Freitas | 47779829 |
+| Rafaella Lopes Mendonça Tolentino | 48033863 |
+
+---
 
 ## 1. Caracterização da Organização
-*(vale 7,5% — Dimensão Conceitual)*
 
-- Nome e natureza da organização: Sweet Thuty, estabelecimento comercial focado em confeitaria
-  
-- **Contexto e porte:** A organização analisada é um estabelecimento de pequeno porte, com fins lucrativos, voltado para o atendimento e comercialização de produtos alimentícios. Atualmente, a operação conta com 3 funcionárias, cada uma responsável por uma função específica no funcionamento diário do estabelecimento.
+**Nome e natureza:** Sweet Thuty, estabelecimento comercial com fins lucrativos, focado em confeitaria.
 
-Sthefany: responsável pelo atendimento no balcão e pelo contato direto com os clientes;
+**Contexto e porte:** A Sweet Thuty é um estabelecimento de pequeno porte voltado ao atendimento e à venda de produtos alimentícios. Conta com três funcionárias, cada uma com uma função definida:
 
-Tuany: responsável pelo caixa e pelo recebimento dos pagamentos;
+- **Sthefany:** atendimento no balcão e contato direto com os clientes.
+- **Tuany:** caixa e recebimento dos pagamentos.
+- **Maria:** cozinha e preparação dos produtos.
 
-Maria: responsável pela cozinha e pela preparação dos produtos.
+Como a equipe é reduzida, as atividades se distribuem entre as três, e o volume de trabalho acompanha o fluxo diário de clientes. Por isso é importante manter os processos bem organizados.
 
-Por possuir uma equipe reduzida, as atividades são distribuídas entre as três funcionárias, sendo necessário manter uma boa organização dos processos para garantir o atendimento aos clientes, o controle das vendas e o funcionamento adequado da cozinha. O estabelecimento realiza atividades de atendimento ao público e vendas de produtos alimentícios, tendo seu volume de atividades diretamente relacionado ao fluxo diário
+**Problemas e necessidades identificados:**
 
-- **Problemas e necessidades identificados:
+- **Dependência de sistemas externos.** A organização usava o aplicativo Anota.ai e relatou dificuldades com o atendimento e o suporte da plataforma. Hoje usa o sistema Consumer, principalmente pelo acesso remoto.
+- **Armazenamento inseguro.** Parte dos dados ficava no disco de um único computador. Quando o equipamento falhou, as informações ficaram indisponíveis. Surgiu a necessidade de um servidor em nuvem.
+- **Atendimento ao cliente.** A responsável prefere conversar diretamente com os clientes, em vez de depender só de atendimento automatizado. Também quer um sistema simples, sem excesso de cadastros para pedidos básicos, como a encomenda de um bolo.
+- **Controle financeiro.** Falta uma visão clara das entradas, das saídas e da margem do negócio.
+- **Controle de estoque.** É preciso saber o que existe, onde está guardado e quanto resta de cada item, com alerta quando um insumo estiver acabando.
+- **Notificações.** A responsável quer avisos simples, preferencialmente pelo WhatsApp, sobre estoque baixo, necessidade de reposição e proximidade da data de entrega de pedidos.
+- **Ferramentas separadas.** Há interesse em reunir no mesmo sistema as funcionalidades que hoje dependem do Anota.ai.
 
-A organização apresenta atualmente alguns problemas relacionados principalmente ao gerenciamento dos pedidos, atendimento aos clientes, armazenamento dos dados, controle de estoque e acompanhamento financeiro.
+**Síntese:** falta uma solução centralizada, simples e segura para gerenciar pedidos, clientes, estoque, financeiro e entregas.
 
-Um dos principais problemas ocorreu com o aplicativo Anota.ai, utilizado anteriormente pela organização. Segundo o relato da responsável, havia dificuldades relacionadas ao atendimento e ao suporte oferecido pela plataforma. Atualmente, a organização utiliza o sistema Consumer, principalmente pela possibilidade de acesso remoto. Entretanto, houve um problema quando o computador utilizado pela empresa apresentou uma falha, pois parte dos dados estava armazenada no disco do equipamento. Isso demonstrou a necessidade de uma solução mais segura para o armazenamento das informações, evitando que uma falha no computador resulte na perda ou indisponibilidade dos dados.
+**Justificativa da escolha:** A organização existe de fato e o grupo tem acesso à responsável, o que permitiu levantar os requisitos por meio de conversa direta. Os problemas são reais e concretos e podem ser transformados em requisitos. O porte é adequado: tem processos suficientes para gerar um modelo relevante, sem ser complexo demais para esta etapa. A responsável tem clareza sobre suas necessidades e está aberta a uma solução tecnológica prática.
 
-Outro problema identificado está relacionado ao atendimento ao cliente. A responsável prefere ter a possibilidade de conversar diretamente com os clientes, em vez de depender exclusivamente de atendimentos automatizados por robôs. Ela também busca um sistema mais simples e prático, que não exija uma quantidade excessiva de cadastros ou informações para realizar pedidos simples, como a encomenda de um bolo.
-
-Também existe uma necessidade de melhorar o controle financeiro e operacional. A responsável gostaria de visualizar de forma clara as entradas e saídas da empresa, além de acompanhar sua margem e ter informações que permitam compreender melhor a situação financeira do negócio.
-
-Em relação ao estoque, existe a necessidade de saber quais produtos e recursos estão disponíveis, onde estão armazenados e quanto ainda resta de cada item. O sistema também deveria emitir alertas quando determinado recurso estiver próximo de acabar, permitindo que a responsável se antecipe à falta de materiais.
-
-Outro ponto importante é a necessidade de notificações simples e acessíveis. Em vez de informações complexas ou difíceis de interpretar, a responsável gostaria de receber avisos de maneira clara, preferencialmente por um canal que já utilize no dia a dia, como o WhatsApp, informando situações como estoque baixo, necessidade de reposição e proximidade da data de entrega de um pedido.
-
-A organização também identificou a necessidade de um servidor em nuvem, permitindo que os dados sejam armazenados com maior segurança e acessados remotamente, independentemente de um único computador. Além disso, existe o interesse em integrar as funcionalidades utilizadas atualmente no Anota.ai ao próprio sistema de gerenciamento da confeitaria, evitando a necessidade de utilizar diversas ferramentas separadas.
-
-Por fim, o sistema ideal deverá permitir o acompanhamento dos pedidos e das datas de entrega, enviando lembretes antecipados e próximos à data programada. Dessa forma, a responsável poderá se organizar com antecedência para a produção e entrega dos pedidos.
-
-Diante desses problemas, a principal crise operacional identificada pode ser resumida como a falta de uma solução centralizada, simples e segura para gerenciar pedidos, clientes, estoque, informações financeiras e entregas, além da dependência de sistemas externos e do armazenamento de dados em equipamentos locais.
-
-
-- Justificativa da escolha:
-
-
-A organização foi escolhida para o desenvolvimento do projeto por apresentar necessidades reais de organização, controle e gerenciamento das atividades, permitindo que o grupo desenvolva uma solução diretamente relacionada aos problemas enfrentados no dia a dia da empresa.
-
-A confeitaria possui uma equipe pequena, formada por três funcionárias, o que torna ainda mais importante a utilização de ferramentas simples e eficientes para auxiliar na administração dos pedidos, estoque, atendimento e informações financeiras. Atualmente, a organização utiliza diferentes recursos e sistemas, mas já enfrentou dificuldades com o atendimento, armazenamento de dados e dependência de equipamentos específicos.
-
-Um dos principais motivos para a escolha foi a ocorrência de problemas relacionados à perda ou indisponibilidade de informações quando o computador apresentou uma falha, evidenciando a necessidade de um sistema com armazenamento em nuvem e maior segurança dos dados. Além disso, a responsável demonstrou interesse em ter uma ferramenta centralizada que facilite o acompanhamento dos pedidos, controle o estoque, apresente as entradas e saídas financeiras e gere alertas sobre recursos próximos do fim e pedidos próximos da data de entrega.
-
-A organização também se mostrou um bom caso para o projeto porque a responsável possui uma visão clara sobre suas necessidades e está aberta à utilização de uma solução tecnológica que seja prática, simples e adequada à rotina da empresa. Entre suas principais expectativas estão a redução de cadastros desnecessários, a possibilidade de manter um contato mais direto com os clientes e o recebimento de avisos por meios de comunicação que já fazem parte de sua rotina, como o WhatsApp.
-
-Dessa forma, a organização apresenta um cenário adequado para o desenvolvimento do projeto, pois os problemas identificados são concretos e podem ser transformados em requisitos para um sistema de gerenciamento integrado. A solução proposta poderá contribuir para centralizar as informações, melhorar o controle dos pedidos e do estoque, aumentar a segurança dos dados e facilitar a tomada de decisões pela responsável.
-
-Portanto, a escolha da organização se justifica pela possibilidade de desenvolver uma solução tecnológica baseada em necessidades reais de uma pequena empresa, proporcionando uma aplicação prática dos conhecimentos adquiridos no projeto e buscando gerar benefícios para a rotina operacional da organização.
-
-
-
+---
 
 ## 2. Processos de Negócio
-*(vale 10% — Dimensão Procedimental)*
 
-- **Principais processos mapeados:** *ex.: cadastro de clientes/beneficiários/fiéis, controle de estoque ou doações, vendas ou arrecadação, emissão de pedidos ou solicitações, entregas ou distribuição, organização de eventos/rituais/mutirões.*
-- **Fluxogramas:** (Opcional) *represente visualmente pelo menos os processos-chave (imagens anexadas). Deve ficar claro o fluxo de cada processo e como eles se integram entre si.*
+**Principais processos mapeados:**
+
+1. **Atendimento e cadastro de clientes:** a atendente recebe o cliente (balcão ou contato direto) e registra apenas os dados essenciais (nome e telefone).
+2. **Registro de pedidos e encomendas:** o pedido é registrado com itens, data e hora de entrega, observações de personalização e, quando houver, foto de referência.
+3. **Produção:** a cozinha consulta o pedido e a receita do produto e prepara a encomenda.
+4. **Pagamento:** o caixa registra o pagamento do pedido (valor, forma e data).
+5. **Controle financeiro:** entradas e saídas são registradas para acompanhar o caixa e a margem.
+6. **Controle de estoque:** insumos são cadastrados, e entradas (compras) e saídas (uso em produção, perdas) são registradas. O sistema alerta quando o estoque chega ao mínimo.
+7. **Compra de insumos:** a reposição é feita junto aos fornecedores cadastrados.
+8. **Notificações:** avisos pelo WhatsApp sobre estoque baixo e proximidade de entregas.
+
+**Fluxo geral (resumo):** Cliente → Atendimento → Pedido → Produção (receita + insumos) → Baixa no estoque → Pagamento → Lançamento financeiro → Entrega.
 
 ---
 
 ## 3. Requisitos do Sistema
-*(esta seção e a Seção 4 "Regras de Negócio" DIVIDEM 7,5% na dimensão conceitual — juntas valem 7,5%, não 7,5% cada — + 4% exclusivos desta seção na organização/documentação)*
 
 ### 3.1 Requisitos Funcionais
-*O que o sistema precisa FAZER (ex.: "o sistema deve permitir registrar uma venda").*
+
+- **RF01:** cadastrar, consultar e editar clientes com o mínimo de informações necessárias.
+- **RF02:** registrar pedidos com itens, data e hora de entrega, observações e foto de referência.
+- **RF03:** acompanhar o status do pedido (pendente, em produção, entregue, cancelado).
+- **RF04:** cadastrar produtos, categorias e receitas.
+- **RF05:** cadastrar insumos e fornecedores.
+- **RF06:** registrar movimentações de estoque (entrada e saída) e consultar a quantidade disponível.
+- **RF07:** alertar quando um insumo atingir o estoque mínimo.
+- **RF08:** registrar pagamentos de pedidos.
+- **RF09:** registrar entradas e saídas financeiras e apresentar o resumo financeiro.
+- **RF10:** enviar notificações pelo WhatsApp (estoque baixo, reposição e proximidade de entrega).
+- **RF11:** controlar o acesso ao sistema por usuário, login e nível de acesso.
 
 ### 3.2 Requisitos Não Funcionais
-*Características de qualidade (ex.: desempenho, segurança, usabilidade, disponibilidade).*
+
+- **RNF01 – Disponibilidade:** os dados devem ficar em servidor em nuvem, acessíveis remotamente.
+- **RNF02 – Segurança:** os dados não podem depender de um único computador, e as senhas devem ser armazenadas criptografadas (hash).
+- **RNF03 – Usabilidade:** a interface deve ser simples e intuitiva, exigindo poucos cadastros para operações básicas.
+- **RNF04 – Integração:** deve ser possível integrar o sistema ao WhatsApp para notificações.
+- **RNF05 – Desempenho:** consultas e registros do dia a dia devem responder rapidamente.
 
 ---
 
 ## 4. Regras de Negócio
-*(esta seção DIVIDE com a Seção 3 "Requisitos do Sistema" os mesmos 7,5% da dimensão conceitual — juntas valem 7,5%, não 7,5% cada — + 4% exclusivos desta seção na documentação. "Regras de negócio" é o termo técnico usado em modelagem de dados para as regras de funcionamento de qualquer organização, com ou sem fins lucrativos)*
 
-- **Regras operacionais:** *condições que a organização impõe (ex.: "um pedido só pode ser fechado se houver estoque disponível", "uma doação só pode ser registrada com identificação do doador", "um ritual só pode ser agendado se o espaço estiver disponível").*
-- **Restrições organizacionais:** *limitações que afetam o modelo (ex.: políticas internas, prazos, exigências legais, normas religiosas ou estatutárias) — e por que elas importam.*
+**Regras operacionais:**
+
+- **RN01:** todo pedido deve estar vinculado a um cliente e conter data de entrega.
+- **RN02:** um pedido deve ter pelo menos um item.
+- **RN03:** o valor total do pedido corresponde à soma dos subtotais dos seus itens.
+- **RN04:** um pedido possui um status, que muda ao longo do atendimento.
+- **RN05:** todo produto pertence a uma categoria.
+- **RN06:** toda receita está associada a um produto.
+- **RN07:** toda movimentação de estoque deve informar o insumo, o tipo (entrada ou saída), a quantidade e a data.
+- **RN08:** quando a quantidade de um insumo ficar igual ou abaixo do estoque mínimo, o sistema deve gerar um alerta.
+- **RN09:** todo pagamento deve estar vinculado a um pedido.
+- **RN10:** o login do usuário deve ser único, e o acesso às funções depende do nível de acesso.
+
+**Restrições organizacionais:**
+
+- **Equipe reduzida:** com apenas três funcionárias, o sistema deve ser simples e evitar cadastros extensos. Isso influencia a quantidade de campos obrigatórios.
+- **Atendimento humano:** a responsável quer manter o contato direto com o cliente, então o sistema apoia o atendimento sem substituí-lo.
+- **Armazenamento seguro:** os dados não podem ficar apenas em um computador local, o que justifica a hospedagem em nuvem.
+- **Canal de comunicação:** os avisos devem usar o WhatsApp, canal já usado na rotina da empresa.
 
 ---
 
 ## 5. Dicionário de Dados Conceitual (Preliminar)
-*(vale 10% — Dimensão Procedimental - Segue o modelo do arquivo 02-03g_Exemplo_Dicionario_Dados.pdf)*
 
-Para cada entidade identificada, liste:
+### USUÁRIO
 
 | Atributo | Descrição | Regra de negócio associada |
-|----------|-----------|------------------------------|
-| *nome do atributo* | *o que ele representa* | *se houver alguma regra (obrigatoriedade, valores possíveis, etc.)* |
+|----------|-----------|----------------------------|
+| id_usuario | Identificador do usuário | Chave primária (PK), gerada automaticamente |
+| nome | Nome completo do usuário | Obrigatório |
+| login | Nome de acesso ao sistema | Obrigatório e único |
+| senha | Senha de acesso | Obrigatória, armazenada em hash |
+| nivel_acesso | Perfil de permissão (ex.: administrador, atendente) | Obrigatório |
+| ativo | Indica se o usuário está ativo | Obrigatório (sim/não) |
 
-*Mantenha o dicionário organizado e padronizado (mesmo formato de tabela para todas as entidades).*
+### CLIENTE
 
-**Atenção à privacidade:** se forem usados exemplos de valores para ilustrar os atributos, esses exemplos devem ser **fictícios** — não utilize dados reais de clientes, fiéis, beneficiários, doadores ou funcionários da organização (nomes, CPFs, contatos etc.), mesmo que tenham sido observados durante a pesquisa de campo. Os exemplos devem apenas ser **coerentes com as operações reais** observadas.
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_cliente | Identificador do cliente | PK, gerada automaticamente |
+| nome | Nome do cliente | Obrigatório |
+| telefone | Telefone/WhatsApp para contato | Obrigatório, usado nas notificações |
+| endereço | Endereço de contato ou entrega | Opcional |
+
+### PEDIDO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_pedidos | Identificador do pedido | PK, gerada automaticamente |
+| id_clientes | Cliente que fez o pedido | Chave estrangeira (FK) para CLIENTE, obrigatória |
+| data_pedidos | Data em que o pedido foi feito | Obrigatória |
+| data_entrega | Data prevista de entrega | Obrigatória, não pode ser anterior à data do pedido |
+| hora_entrega | Horário previsto de entrega | Opcional |
+| status | Situação do pedido | Obrigatório (pendente, em produção, entregue, cancelado) |
+| valor_total | Valor total do pedido | Obrigatório, soma dos subtotais dos itens |
+| observações | Detalhes e personalizações | Opcional |
+| foto_referências | Foto de referência do produto desejado | Opcional |
+
+### ITEM_PEDIDOS
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_item | Identificador do item | PK, gerada automaticamente |
+| id_pedido | Pedido ao qual o item pertence | FK para PEDIDO, obrigatória |
+| id_produto | Produto solicitado | FK para PRODUTO, obrigatória |
+| quantidade | Quantidade solicitada | Obrigatória, maior que zero |
+| preço_unitário | Preço do produto no momento do pedido | Obrigatório |
+| subtotal | Quantidade multiplicada pelo preço unitário | Calculado |
+
+### CATEGORIA_PRODUTO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_categoria | Identificador da categoria | PK, gerada automaticamente |
+| nome | Nome da categoria (ex.: bolos, doces, tortas) | Obrigatório |
+| descrição | Descrição da categoria | Opcional |
+| ativo | Indica se a categoria está ativa | Obrigatório (sim/não) |
+
+### PRODUTO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_produto | Identificador do produto | PK, gerada automaticamente |
+| nome | Nome do produto | Obrigatório |
+| descrição | Descrição do produto | Opcional |
+| categoria | Categoria do produto | FK para CATEGORIA_PRODUTO, obrigatória |
+| tamanho | Tamanho do produto (ex.: P, M, G) | Opcional |
+| quantidade_pessoas | Quantas pessoas o produto serve | Opcional |
+| preço_base | Preço base de venda | Obrigatório, maior que zero |
+| ativo | Indica se o produto está disponível | Obrigatório (sim/não) |
+
+### RECEITA
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_receitas | Identificador da receita | PK, gerada automaticamente |
+| id_produtos | Produto ao qual a receita pertence | FK para PRODUTO, obrigatória |
+| nome | Nome da receita | Obrigatório |
+| descrições | Modo de preparo e observações | Opcional |
+
+### INSUMO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_insumo | Identificador do insumo | PK, gerada automaticamente |
+| nome | Nome do insumo (ex.: farinha, chocolate) | Obrigatório |
+| categoria | Categoria do insumo | Opcional |
+| unidade_medida | Unidade de medida (kg, g, L, un) | Obrigatória |
+| tipo | Tipo do insumo (ex.: ingrediente, embalagem) | Opcional |
+| estoque_minimo | Quantidade mínima antes do alerta | Opcional, base para o alerta de estoque baixo |
+| ativo | Indica se o insumo está ativo | Obrigatório (sim/não) |
+
+### FORNECEDOR
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_fornecedor | Identificador do fornecedor | PK, gerada automaticamente |
+| nome | Nome do fornecedor | Obrigatório |
+| telefone | Telefone de contato | Opcional |
+| endereço | Endereço do fornecedor | Opcional |
+
+### ESTOQUE
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_estoque | Identificador do registro de estoque | PK, gerada automaticamente |
+| id_insumo | Insumo armazenado | FK para INSUMO, obrigatória |
+| id_fornecedor | Fornecedor do insumo | FK para FORNECEDOR, opcional |
+| quantidade_atual | Quantidade disponível | Obrigatória, não pode ser negativa |
+| local_armazenamento | Local onde o insumo está guardado | Opcional |
+
+### MOVIMENTAÇÃO_ESTOQUE
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_movimentação | Identificador da movimentação | PK, gerada automaticamente |
+| id_insumos | Insumo movimentado | FK para INSUMO, obrigatória |
+| tipo_movimentação | Tipo da movimentação | Obrigatório (entrada ou saída) |
+| quantidade | Quantidade movimentada | Obrigatória, maior que zero |
+| data_movimentação | Data da movimentação | Obrigatória |
+| motivos | Motivo (compra, uso em produção, perda) | Opcional |
+
+### PAGAMENTO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_pagamento | Identificador do pagamento | PK, gerada automaticamente |
+| id_pedido | Pedido pago | FK para PEDIDO, obrigatória |
+| valor | Valor pago | Obrigatório, maior que zero |
+| forma_pagamento | Forma de pagamento (Pix, dinheiro, cartão) | Obrigatória |
+| data_pagamento | Data do pagamento | Obrigatória |
+
+### FINANCEIRO
+
+| Atributo | Descrição | Regra de negócio associada |
+|----------|-----------|----------------------------|
+| id_financeiro | Identificador do lançamento | PK, gerada automaticamente |
+| id_pedido | Pedido relacionado ao lançamento | FK para PEDIDO, opcional (saídas não têm pedido) |
+| tipo | Tipo do lançamento | Obrigatório (entrada ou saída) |
+| descrição | Descrição do lançamento | Opcional |
+| valor | Valor da movimentação | Obrigatório, maior que zero |
+| data_movimentação | Data da movimentação | Obrigatória |
+| forma_pagamento | Forma de pagamento utilizada | Opcional |
+
+*Os exemplos de valores citados são fictícios e não representam dados reais da organização.*
 
 ---
 
 ## 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
-*(vale 7,5% na dimensão conceitual)*
 
-- **Entidades reconhecidas:** *liste e justifique brevemente cada uma.*
-- **Atributos e classificações:** *quais atributos pertencem a cada entidade.*
-- **Relacionamentos pertinentes:** *como as entidades se conectam.*
-- **Restrições e políticas organizacionais aplicadas ao modelo.**
+**Entidades reconhecidas:**
+
+| Entidade | Justificativa |
+|----------|---------------|
+| USUÁRIO | Quem acessa o sistema e registra as operações |
+| CLIENTE | Quem faz as encomendas e recebe as notificações |
+| PEDIDO | Registra cada encomenda, com datas, status e valor |
+| ITEM_PEDIDOS | Detalha os produtos e as quantidades de cada pedido |
+| CATEGORIA_PRODUTO | Organiza os produtos (bolos, doces, tortas) |
+| PRODUTO | Itens vendidos pela confeitaria |
+| RECEITA | Define como cada produto é preparado |
+| INSUMO | Ingredientes e materiais usados na produção |
+| FORNECEDOR | Quem fornece os insumos |
+| ESTOQUE | Controla a quantidade e a localização dos insumos |
+| MOVIMENTAÇÃO_ESTOQUE | Histórico de entradas e saídas do estoque |
+| PAGAMENTO | Pagamentos recebidos pelos pedidos |
+| FINANCEIRO | Entradas e saídas financeiras da confeitaria |
+
+**Atributos e classificações:** os atributos de cada entidade estão detalhados no Dicionário de Dados (Seção 5).
+
+**Relacionamentos e cardinalidades:**
+
+| Entidade A | Relacionamento | Entidade B | Cardinalidade |
+|------------|----------------|------------|---------------|
+| USUÁRIO | realiza | PEDIDO | 1:N |
+| CLIENTE | faz | PEDIDO | 1:N |
+| PEDIDO | possui | ITEM_PEDIDOS | 1:N |
+| PRODUTO | aparece em | ITEM_PEDIDOS | 1:N |
+| CATEGORIA_PRODUTO | classifica | PRODUTO | 1:N |
+| PRODUTO | tem | RECEITA | 1:N |
+| PEDIDO | recebe | PAGAMENTO | 1:N |
+| USUÁRIO | registra | FINANCEIRO | 1:N |
+| FINANCEIRO | tem | PAGAMENTO | 1:N |
+| INSUMO | possui | ESTOQUE | 1:N |
+| INSUMO | sofre | MOVIMENTAÇÃO_ESTOQUE | 1:N |
+| FORNECEDOR | fornece | ESTOQUE | 1:N |
+
+**Restrições e políticas aplicadas ao modelo:** poucos campos obrigatórios (equipe reduzida), telefone do cliente obrigatório (necessário para as notificações pelo WhatsApp), estoque mínimo por insumo (alertas) e senha em hash (segurança).
 
 ---
 
 ## 7. Diagrama Entidade-Relacionamento (DER)
-*(vale 20% — é o item de maior peso da entrega)*
 
-- Anexe o DER (em imagem).
-- O diagrama deve representar corretamente:
-  - Entidades
-  - Atributos
-  - Relacionamentos
-  - **Cardinalidades**
-- O modelo deve ser **consistente** e já demonstrar potencial de **escalabilidade e integração** (pensando nas próximas etapas do projeto).
+![DER da Sweet Thuty](DER_CONFEITARIA_drawio.png)
+
+O diagrama representa as entidades, os atributos, os relacionamentos e as cardinalidades descritos nas seções anteriores.
 
 ---
 
 ## 8. Justificativa Técnica
-*(vale 7,5% — sozinho, é o subcritério de maior peso dentro da Dimensão Conceitual)*
 
-*Explique e defenda as decisões de abstração e modelagem tomadas: por que essas entidades, esses atributos, esses relacionamentos e essas cardinalidades — e não outras alternativas possíveis?*
+- **Separação entre PEDIDO e ITEM_PEDIDOS:** um pedido pode ter vários produtos, e cada item guarda quantidade e preço no momento da venda. Assim, mudanças futuras de preço não alteram pedidos antigos.
+- **CATEGORIA_PRODUTO como entidade própria:** evita repetir o nome da categoria em cada produto e facilita criar novas categorias.
+- **RECEITA ligada ao PRODUTO:** cada produto tem seu modo de preparo, o que permite à cozinha consultá-lo e, nas próximas etapas, relacionar a receita aos insumos consumidos.
+- **ESTOQUE e MOVIMENTAÇÃO_ESTOQUE separados:** o estoque guarda a quantidade atual e a localização, e a movimentação guarda o histórico. Isso permite o alerta de estoque mínimo e a rastreabilidade de entradas, saídas e perdas.
+- **FORNECEDOR separado de INSUMO:** um fornecedor pode atender vários insumos, e registrá-lo à parte evita repetição de dados.
+- **PAGAMENTO e FINANCEIRO separados:** o pagamento está ligado ao pedido, enquanto o financeiro cobre também as saídas (compras, despesas), que não têm pedido.
+- **USUÁRIO como entidade:** controla o acesso por login e nível de permissão, necessário por haver mais de uma pessoa operando o sistema.
+- **Cadastro enxuto de CLIENTE:** reflete o pedido da responsável por menos burocracia, mantendo o telefone para as notificações.
+- **Escalabilidade e integração:** o modelo permite, nas próximas etapas, incluir a relação entre receita e insumos, mais formas de pagamento e a integração com o WhatsApp.
 
 ---
 
 ## 9. Uso de Inteligência Artificial
-*(documentação obrigatória — não é opcional se o grupo usou IA em qualquer etapa: pesquisa, escrita, organização de ideias ou revisão de texto)*
 
-Se o grupo usou alguma ferramenta de IA (ChatGPT, Claude, Gemini, Perplexity etc.) em qualquer parte do trabalho, registre **para cada uso relevante**:
+### ChatGPT
 
+| Item | Registro |
+|------|----------|
+| **Ferramenta e etapa** | ChatGPT, nas funcionalidades e na decoração do site |
+| **Motivação** | Dúvidas sobre as funcionalidades do site, principalmente a visualização |
+| **Prompt(s) utilizados** | Perguntas sobre CSS e layout, como sombras, a frase decorativa e títulos com símbolo |
+| **Fontes consultadas e verificadas** | A IA foi usada apenas para o site e a decoração |
+| **Trechos rejeitados ou corrigidos** | DER gerado com letras e símbolos ilegíveis |
+| **Reflexão crítica** | Limitação na geração de imagens e alucinação da IA, com palavras em inglês no DER onde deveria haver português |
 
-| **Ferramenta e etapa** | Qual IA foi usada e em qual parte do trabalho: CHATGPT PARA FUNCIONALIDADES DO SITE
-| **Motivação**: POIS TINHAMOS DÚVIDAS REFERENTES AOS FUNCIONALIDADES DO SITE, PRINCIPALMENTE A VISUALIZAÇÃO.
-| **Prompt(s) utilizados** 
-    box-shadow:
-        0 5px 20px rgba(100, 45, 45, 0.08);
+### Claude (Anthropic)
 
-        .frase-decorativa {
-    width: 220px;
-
-    align-self: center;
-
-    text-align: center;
-
-    font-family:
-        "Brush Script MT",
-        "Segoe Script",
-        cursive;
-
-    font-size: 21px;
-
-    color: #87545b;
-
-    transform: rotate(-3deg);
-
-    padding: 20px;
-}
-
-.conteudo-secao h2::after {
-    content: " ♥";
-
-    font-family: Arial, sans-serif;
-
-    font-size: 15px;
-
-    color: #d96e88;
-}
-
-
-| **Fontes consultadas e verificadas** USAMOS A IA APENAS PARA A FUNCIONALIDADE DO SITE E A DECORAÇÃO, A PARTE REFERENTE AO BANCO DE DADOS, FOI FEITA SEM IA 
-| **Trechos rejeitados ou corrigidos** DER COM LETRAS E SIMBOLOS INELEGIVEIS 
-| **Reflexão crítica** | LIMITAÇÃO NAS IMAGENS, ALUCINAÇÃO DA IA (APARECIMENTO DE PALAVRAS EM INGLES NO DER NO QUE DEVERIA SER EM PORTUGUÊS)
-
-
----
-
-## Critérios Atitudinais (20%)
-**Estes critérios NÃO constam explicitamente como item de entrega no README.** Eles são avaliados por meio de **Avaliação 360º entre os integrantes do grupo** (cada membro avalia os colegas de equipe) e, no caso da Colaboração, também pela **colaboração equilibrada no histórico de commits** do repositório GitHub — não pela leitura do restante do repositório nem pela apresentação:
-
-- **Participação (5%):** envolvimento nas discussões técnicas e nas decisões do grupo.
-- **Comprometimento (5%):** cumprimento de prazos e responsabilidades assumidas.
-- **Colaboração (5%):** respeito às contribuições dos colegas, cooperação na construção do projeto e colaboração equilibrada no histórico de commits do repositório GitHub.
-- **Autonomia (5%):** busca independente de soluções e proposta de melhorias.
-
----
-
-## Resumo dos Pesos
-
-| Dimensão | Peso total |
-|----------|-----------|
-| Conceitual (contexto, requisitos/regras, modelagem, justificativa técnica) | 30% |
-| Procedimental (requisitos, fluxogramas, dicionário de dados, DER) | 50% |
-| Atitudinal (participação, comprometimento, colaboração, autonomia) | 20% |
-
-**Entrega final:** README.md completo + DER + Dicionário de Dados em HTML (com exceção dos cursos GTI) anexado no repositório GitHub do grupo.
+| Item | Registro |
+|------|----------|
+| **Ferramenta e etapa** | Claude, na elaboração do dicionário de dados e na sua versão em HTML para o site |
+| **Motivação** | Organizar o dicionário de dados a partir da imagem do DER e adaptá-lo ao site |
+| **Prompt(s) utilizados** | "Faça um dicionário de dados" (com a imagem do DER anexada); "em HTML"; "faça apenas o código"; "preciso adicionar essa parte do dicionário no site"; "modelo README GitHub texto limpo" |
+| **Fontes consultadas e verificadas** | O conteúdo foi baseado no DER do grupo e conferido com ele |
+| **Trechos rejeitados ou corrigidos** | A IA apontou inconsistências no DER (ESTOQUE, FORNECEDORES, ITEM_PEDIDOS), tratadas pelo grupo |
+| **Reflexão crítica** | Os tipos de dados são sugestões da IA e dependem da validação do grupo e da escolha do banco |
