@@ -9,7 +9,7 @@ Modelagem de um sistema de gestão de informações para uma confeitaria de pequ
 | Arquivo | Conteúdo |
 |---|---|
 | `README.md` | Este documento |
-| `DER_CONFEITARIA_.png` | Diagrama Entidade-Relacionamento atualizado (com cardinalidades mín./máx.) |
+| `DER_CONFEITARIA.png` | Diagrama Entidade-Relacionamento atualizado (com cardinalidades mín./máx.) |
 | `dicionario.html` | Dicionário de dados completo (versão 2.0) |
 | `fotos_confeitaria/` | Fotos do interior da loja, com o letreiro "Sweet Thuty Patisserie" |
 
