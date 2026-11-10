@@ -1,8 +1,4 @@
--- Sweet Thuty - script de criação das tabelas (versão revisada)
--- Obs.: sem CREATE DATABASE / USE, pois o SQL online já fornece o banco.
--- Requer MySQL 8.0.16+ ou MariaDB 10.2+ (CHECK e coluna gerada).
 
--- Limpeza para poder rodar o script mais de uma vez (ordem inversa das dependências)
 DROP TABLE IF EXISTS financeiro;
 DROP TABLE IF EXISTS pagamento;
 DROP TABLE IF EXISTS item_compra;
@@ -74,7 +70,7 @@ CREATE TABLE pedido (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
     CHECK (tipo_pedido IN ('pronta-entrega', 'encomenda', 'delivery')),
-    -- Encomendas e delivery exigem cliente; venda de balcão pode ficar sem cliente
+
     CHECK (tipo_pedido NOT IN ('encomenda', 'delivery') OR id_cliente IS NOT NULL),
     CHECK (valor_total >= 0),
     CHECK (data_entrega IS NULL OR data_entrega >= data_pedido)
@@ -87,7 +83,7 @@ CREATE TABLE item_pedido (
     quantidade INT NOT NULL,
     preco_unitario DECIMAL(10,2) NOT NULL,
     personalizacao TEXT,
-    -- Calculado automaticamente: não informar no INSERT
+
     subtotal DECIMAL(10,2) GENERATED ALWAYS AS (quantidade * preco_unitario) STORED,
     FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto),
@@ -218,7 +214,7 @@ CREATE TABLE financeiro (
     FOREIGN KEY (id_compra) REFERENCES compra(id_compra),
     CHECK (tipo IN ('entrada', 'saida')),
     CHECK (valor >= 0),
-    -- O lançamento deve vir de um pagamento OU de uma compra (nunca ambos, nunca nenhum)
+
     CHECK ((id_pagamento IS NOT NULL AND id_compra IS NULL)
         OR (id_pagamento IS NULL AND id_compra IS NOT NULL))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
