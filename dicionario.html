@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -188,8 +187,13 @@
             </p>
 
             <p>
-                Os tipos de dados apresentados são sugestões para implementação
-                em um banco de dados relacional.
+                Os tipos de dados correspondem ao script SQL do banco
+                (MySQL/MariaDB). Na coluna <strong>Obrigatório</strong>,
+                <em>Sim</em> indica preenchimento exigido, <em>Não</em> indica campo opcional,
+                <em>Condicional</em> indica que a exigência depende do contexto descrito
+                e <em>Calculado</em> indica valor obtido a partir de outros campos.
+                <span class="badge pk">PK</span> marca a chave primária e
+                <span class="badge fk">FK</span> a chave estrangeira.
             </p>
         </div>
 
@@ -205,6 +209,7 @@
             <a href="#receita">Receita</a>
             <a href="#item-receita">Item da Receita</a>
             <a href="#insumo">Insumo</a>
+            <a href="#local-armazenamento">Local de Armazenamento</a>
             <a href="#estoque">Estoque</a>
             <a href="#movimentacao">Movimentação de Estoque</a>
             <a href="#fornecedor">Fornecedor</a>
@@ -251,7 +256,7 @@
                             <td><code>login</code></td>
                             <td>VARCHAR(50)</td>
                             <td>Sim</td>
-                            <td>Nome utilizado para acessar o sistema.</td>
+                            <td>Nome utilizado para acessar o sistema. Deve ser único.</td>
                         </tr>
 
                         <tr>
@@ -263,7 +268,7 @@
 
                         <tr>
                             <td><code>nivel_acesso</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Perfil de acesso ao sistema.</td>
                         </tr>
@@ -272,7 +277,7 @@
                             <td><code>ativo</code></td>
                             <td>BOOLEAN</td>
                             <td>Sim</td>
-                            <td>Indica se o usuário está ativo.</td>
+                            <td>Indica se o usuário está ativo. Padrão: verdadeiro.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -307,29 +312,29 @@
 
                         <tr>
                             <td><code>nome</code></td>
-                            <td>VARCHAR(60)</td>
+                            <td>VARCHAR(100)</td>
                             <td>Sim</td>
                             <td>Nome do cliente.</td>
                         </tr>
 
                         <tr>
                             <td><code>sobrenome</code></td>
-                            <td>VARCHAR(80)</td>
-                            <td>Sim</td>
+                            <td>VARCHAR(100)</td>
+                            <td>Não</td>
                             <td>Sobrenome do cliente.</td>
                         </tr>
 
                         <tr>
                             <td><code>telefone</code></td>
                             <td>VARCHAR(20)</td>
-                            <td>Sim</td>
+                            <td>Não</td>
                             <td>Telefone para contato.</td>
                         </tr>
 
                         <tr>
                             <td><code>endereco</code></td>
-                            <td>VARCHAR(200)</td>
-                            <td>Sim</td>
+                            <td>VARCHAR(255)</td>
+                            <td>Não</td>
                             <td>Endereço do cliente.</td>
                         </tr>
                     </tbody>
@@ -374,19 +379,19 @@
                             <td><code>id_cliente</code> <span class="badge fk">FK</span></td>
                             <td>INT</td>
                             <td>Condicional</td>
-                            <td>Cliente associado ao pedido. Pode ficar vazio em vendas presenciais.</td>
+                            <td>Cliente associado ao pedido. Obrigatório em encomendas e delivery; pode ficar vazio em vendas presenciais de balcão.</td>
                         </tr>
 
                         <tr>
                             <td><code>tipo_pedido</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Pronta-entrega, encomenda ou delivery.</td>
                         </tr>
 
                         <tr>
                             <td><code>status</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Situação atual do pedido.</td>
                         </tr>
@@ -402,7 +407,7 @@
                             <td><code>data_entrega</code></td>
                             <td>DATE</td>
                             <td>Condicional</td>
-                            <td>Data prevista para entrega ou retirada.</td>
+                            <td>Data prevista para entrega ou retirada. Não pode ser anterior à data do pedido.</td>
                         </tr>
 
                         <tr>
@@ -416,7 +421,7 @@
                             <td><code>valor_total</code></td>
                             <td>DECIMAL(10,2)</td>
                             <td>Sim</td>
-                            <td>Valor total do pedido.</td>
+                            <td>Valor total do pedido. Padrão: 0. Não pode ser negativo.</td>
                         </tr>
 
                         <tr>
@@ -437,7 +442,7 @@
             </div>
         </section>
 
-        <!-- ITEM DO PEDIDO -->
+        <!-- ITEM_PEDIDO -->
 
         <section id="item-pedido">
             <h2>ITEM_PEDIDO</h2>
@@ -481,7 +486,7 @@
                             <td><code>quantidade</code></td>
                             <td>INT</td>
                             <td>Sim</td>
-                            <td>Quantidade solicitada.</td>
+                            <td>Quantidade solicitada. Deve ser maior que zero.</td>
                         </tr>
 
                         <tr>
@@ -509,7 +514,7 @@
             </div>
         </section>
 
-        <!-- CATEGORIA -->
+        <!-- CATEGORIA_PRODUTO -->
 
         <section id="categoria">
             <h2>CATEGORIA_PRODUTO</h2>
@@ -537,14 +542,14 @@
 
                         <tr>
                             <td><code>nome</code></td>
-                            <td>VARCHAR(60)</td>
+                            <td>VARCHAR(100)</td>
                             <td>Sim</td>
                             <td>Nome da categoria.</td>
                         </tr>
 
                         <tr>
                             <td><code>descricao</code></td>
-                            <td>VARCHAR(200)</td>
+                            <td>TEXT</td>
                             <td>Não</td>
                             <td>Descrição da categoria.</td>
                         </tr>
@@ -553,7 +558,7 @@
                             <td><code>ativo</code></td>
                             <td>BOOLEAN</td>
                             <td>Sim</td>
-                            <td>Indica se a categoria está ativa.</td>
+                            <td>Indica se a categoria está ativa. Padrão: verdadeiro.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -609,7 +614,7 @@
 
                         <tr>
                             <td><code>tamanho</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(50)</td>
                             <td>Não</td>
                             <td>Tamanho ou apresentação do produto.</td>
                         </tr>
@@ -618,21 +623,21 @@
                             <td><code>quantidade_pessoas</code></td>
                             <td>INT</td>
                             <td>Não</td>
-                            <td>Quantidade estimada de pessoas atendidas.</td>
+                            <td>Quantidade estimada de pessoas atendidas. Quando informada, deve ser maior que zero.</td>
                         </tr>
 
                         <tr>
                             <td><code>preco_base</code></td>
                             <td>DECIMAL(10,2)</td>
                             <td>Sim</td>
-                            <td>Preço de referência do produto.</td>
+                            <td>Preço de referência do produto. Não pode ser negativo.</td>
                         </tr>
 
                         <tr>
                             <td><code>ativo</code></td>
                             <td>BOOLEAN</td>
                             <td>Sim</td>
-                            <td>Indica se o produto está disponível.</td>
+                            <td>Indica se o produto está disponível. Padrão: verdadeiro.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -644,7 +649,7 @@
         <section id="receita">
             <h2>RECEITA</h2>
 
-            <p>Armazena as receitas utilizadas na produção dos produtos.</p>
+            <p>Armazena as receitas utilizadas na produção dos produtos. Cada produto pode ter no máximo uma receita.</p>
 
             <div class="table-wrap">
                 <table>
@@ -669,7 +674,7 @@
                             <td><code>id_produto</code> <span class="badge fk">FK</span></td>
                             <td>INT</td>
                             <td>Sim</td>
-                            <td>Produto associado à receita.</td>
+                            <td>Produto associado à receita. Valor único: um produto não pode ter duas receitas.</td>
                         </tr>
 
                         <tr>
@@ -688,16 +693,16 @@
 
                         <tr>
                             <td><code>rendimento</code></td>
-                            <td>VARCHAR(50)</td>
+                            <td>INT</td>
                             <td>Não</td>
-                            <td>Rendimento estimado da receita.</td>
+                            <td>Rendimento estimado da receita, em número de porções ou unidades.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- ITEM DA RECEITA -->
+        <!-- ITEM_RECEITA -->
 
         <section id="item-receita">
             <h2>ITEM_RECEITA</h2>
@@ -741,7 +746,7 @@
                             <td><code>quantidade_necessaria</code></td>
                             <td>DECIMAL(10,3)</td>
                             <td>Sim</td>
-                            <td>Quantidade necessária do ingrediente.</td>
+                            <td>Quantidade necessária do ingrediente. Deve ser maior que zero.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -783,14 +788,14 @@
 
                         <tr>
                             <td><code>categoria</code></td>
-                            <td>VARCHAR(50)</td>
+                            <td>VARCHAR(100)</td>
                             <td>Não</td>
                             <td>Classificação do insumo.</td>
                         </tr>
 
                         <tr>
                             <td><code>unidade_medida</code></td>
-                            <td>VARCHAR(10)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Unidade de controle, como kg, g, L ou unidade.</td>
                         </tr>
@@ -799,14 +804,58 @@
                             <td><code>estoque_minimo</code></td>
                             <td>DECIMAL(10,3)</td>
                             <td>Não</td>
-                            <td>Quantidade mínima para alerta de reposição.</td>
+                            <td>Quantidade mínima para alerta de reposição. Padrão: 0.</td>
                         </tr>
 
                         <tr>
                             <td><code>ativo</code></td>
                             <td>BOOLEAN</td>
                             <td>Sim</td>
-                            <td>Indica se o insumo está em uso.</td>
+                            <td>Indica se o insumo está em uso. Padrão: verdadeiro.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- LOCAL_ARMAZENAMENTO -->
+
+        <section id="local-armazenamento">
+            <h2>LOCAL_ARMAZENAMENTO</h2>
+
+            <p>Cadastra os locais físicos onde os insumos são guardados, como cozinha ou depósito.</p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Atributo</th>
+                            <th>Tipo</th>
+                            <th>Obrigatório</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><code>id_local</code> <span class="badge pk">PK</span></td>
+                            <td>INT</td>
+                            <td>Sim</td>
+                            <td>Identificador único do local de armazenamento.</td>
+                        </tr>
+
+                        <tr>
+                            <td><code>nome</code></td>
+                            <td>VARCHAR(100)</td>
+                            <td>Sim</td>
+                            <td>Nome do local, como cozinha ou depósito.</td>
+                        </tr>
+
+                        <tr>
+                            <td><code>descricao</code></td>
+                            <td>TEXT</td>
+                            <td>Não</td>
+                            <td>Descrição do local.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -818,10 +867,7 @@
         <section id="estoque">
             <h2>ESTOQUE</h2>
 
-            <p>
-                Controla a quantidade disponível de cada insumo em cada local,
-                como cozinha ou depósito.
-            </p>
+            <p>Controla a quantidade disponível de cada insumo em cada local de armazenamento, como cozinha ou depósito. Cada combinação de insumo e local aparece uma única vez.</p>
 
             <div class="table-wrap">
                 <table>
@@ -850,24 +896,24 @@
                         </tr>
 
                         <tr>
-                            <td><code>local_armazenamento</code></td>
-                            <td>VARCHAR(50)</td>
+                            <td><code>id_local</code> <span class="badge fk">FK</span></td>
+                            <td>INT</td>
                             <td>Sim</td>
-                            <td>Local físico do insumo, como cozinha ou depósito.</td>
+                            <td>Local onde o insumo está armazenado.</td>
                         </tr>
 
                         <tr>
                             <td><code>quantidade_atual</code></td>
                             <td>DECIMAL(10,3)</td>
                             <td>Sim</td>
-                            <td>Quantidade disponível naquele local.</td>
+                            <td>Quantidade disponível naquele local. Padrão: 0. Não pode ser negativa.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- MOVIMENTAÇÃO DE ESTOQUE -->
+        <!-- MOVIMENTAÇÃO_ESTOQUE -->
 
         <section id="movimentacao">
             <h2>MOVIMENTAÇÃO_ESTOQUE</h2>
@@ -902,7 +948,7 @@
 
                         <tr>
                             <td><code>tipo_movimentacao</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Tipo de movimentação realizada.</td>
                         </tr>
@@ -911,19 +957,19 @@
                             <td><code>quantidade</code></td>
                             <td>DECIMAL(10,3)</td>
                             <td>Sim</td>
-                            <td>Quantidade movimentada.</td>
+                            <td>Quantidade movimentada. Deve ser maior que zero.</td>
                         </tr>
 
                         <tr>
                             <td><code>data_movimentacao</code></td>
                             <td>DATETIME</td>
                             <td>Sim</td>
-                            <td>Data e hora da movimentação.</td>
+                            <td>Data e hora da movimentação. Padrão: momento do registro.</td>
                         </tr>
 
                         <tr>
                             <td><code>motivo</code></td>
-                            <td>VARCHAR(200)</td>
+                            <td>TEXT</td>
                             <td>Não</td>
                             <td>Motivo da movimentação.</td>
                         </tr>
@@ -974,7 +1020,7 @@
 
                         <tr>
                             <td><code>endereco</code></td>
-                            <td>VARCHAR(200)</td>
+                            <td>VARCHAR(255)</td>
                             <td>Não</td>
                             <td>Endereço do fornecedor.</td>
                         </tr>
@@ -983,7 +1029,7 @@
                             <td><code>ativo</code></td>
                             <td>BOOLEAN</td>
                             <td>Sim</td>
-                            <td>Indica se o fornecedor está ativo.</td>
+                            <td>Indica se o fornecedor está ativo. Padrão: verdadeiro.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1039,7 +1085,7 @@
 
                         <tr>
                             <td><code>status</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Situação da compra.</td>
                         </tr>
@@ -1048,14 +1094,14 @@
                             <td><code>valor_total</code></td>
                             <td>DECIMAL(10,2)</td>
                             <td>Sim</td>
-                            <td>Valor total da compra.</td>
+                            <td>Valor total da compra. Padrão: 0. Não pode ser negativo.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- ITEM DA COMPRA -->
+        <!-- ITEM_COMPRA -->
 
         <section id="item-compra">
             <h2>ITEM_COMPRA</h2>
@@ -1099,7 +1145,7 @@
                             <td><code>quantidade</code></td>
                             <td>DECIMAL(10,3)</td>
                             <td>Sim</td>
-                            <td>Quantidade adquirida.</td>
+                            <td>Quantidade adquirida. Deve ser maior que zero.</td>
                         </tr>
 
                         <tr>
@@ -1125,10 +1171,7 @@
         <section id="pagamento">
             <h2>PAGAMENTO</h2>
 
-            <p>
-                Registra os pagamentos dos pedidos, incluindo sinal,
-                pagamentos parciais e quitação.
-            </p>
+            <p>Registra os pagamentos dos pedidos, incluindo sinal, pagamentos parciais e quitação.</p>
 
             <div class="table-wrap">
                 <table>
@@ -1160,35 +1203,35 @@
                             <td><code>valor</code></td>
                             <td>DECIMAL(10,2)</td>
                             <td>Sim</td>
-                            <td>Valor pago nesta transação.</td>
+                            <td>Valor pago nesta transação. Deve ser maior que zero.</td>
                         </tr>
 
                         <tr>
                             <td><code>forma_pagamento</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Débito, crédito, Pix, dinheiro ou VR.</td>
                         </tr>
 
                         <tr>
                             <td><code>tipo_pagamento</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Sinal, pagamento parcial ou quitação.</td>
                         </tr>
 
                         <tr>
                             <td><code>status_pagamento</code></td>
-                            <td>VARCHAR(20)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Pendente, confirmado ou estornado.</td>
                         </tr>
 
                         <tr>
                             <td><code>data_pagamento</code></td>
-                            <td>DATE</td>
-                            <td>Sim</td>
-                            <td>Data do pagamento ou registro.</td>
+                            <td>DATETIME</td>
+                            <td>Condicional</td>
+                            <td>Data e hora do pagamento. Pode ficar vazia enquanto o pagamento estiver pendente.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1244,14 +1287,14 @@
 
                         <tr>
                             <td><code>tipo</code></td>
-                            <td>VARCHAR(10)</td>
+                            <td>VARCHAR(30)</td>
                             <td>Sim</td>
                             <td>Entrada ou saída.</td>
                         </tr>
 
                         <tr>
                             <td><code>descricao</code></td>
-                            <td>VARCHAR(200)</td>
+                            <td>TEXT</td>
                             <td>Não</td>
                             <td>Descrição do lançamento.</td>
                         </tr>
@@ -1260,14 +1303,14 @@
                             <td><code>valor</code></td>
                             <td>DECIMAL(10,2)</td>
                             <td>Sim</td>
-                            <td>Valor do lançamento financeiro.</td>
+                            <td>Valor do lançamento financeiro. Não pode ser negativo.</td>
                         </tr>
 
                         <tr>
                             <td><code>data_lancamento</code></td>
-                            <td>DATE</td>
+                            <td>DATETIME</td>
                             <td>Sim</td>
-                            <td>Data do lançamento.</td>
+                            <td>Data e hora do lançamento. Padrão: momento do registro.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1296,7 +1339,9 @@
 
                 <li>Vendas presenciais de balcão podem ser registradas sem cadastro do cliente.</li>
 
-                <li>O estoque deve registrar separadamente as quantidades de cada insumo na cozinha e no depósito.</li>
+                <li>Cada produto pode ter no máximo uma receita.</li>
+
+                <li>O estoque deve registrar separadamente as quantidades de cada insumo em cada local de armazenamento, como cozinha e depósito; cada combinação de insumo e local aparece uma única vez.</li>
             </ul>
         </section>
 
@@ -1308,4 +1353,3 @@
 
 </body>
 </html>
-```
