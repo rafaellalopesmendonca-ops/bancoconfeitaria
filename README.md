@@ -342,7 +342,7 @@ O diagrama representa as entidades, os atributos, os relacionamentos e as cardin
 <img src="fotos_confeitaria/foto2.jpeg" alt="Descrição da foto" width="200">
 <img src="fotos_confeitaria/foto3.jpeg" alt="Descrição da foto" width="200">
 <img src="fotos_confeitaria/foto4.webp" alt="Descrição da foto" width="200">
-<img src="fotos_confeitaria/foto5.webp" alt="Descrição da foto" width="400">
+<img src="fotos_confeitaria/fot7.jpeg" alt="Descrição da foto" width="400">
 
 ## 9. Uso de Inteligência Artificial
 
