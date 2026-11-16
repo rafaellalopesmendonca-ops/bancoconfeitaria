@@ -336,7 +336,7 @@ O diagrama representa as entidades, os atributos, os relacionamentos e as cardin
 - **Escalabilidade e integração:** o modelo permite, nas próximas etapas, incluir mais formas de pagamento, uma entidade de compra de insumos e a integração com o WhatsApp.
 
 ---
-
+### Fotos Confentaria
 
 <img src="fotos_confeitaria/foto1.jpeg" alt="Descrição da foto" width="200">
 <img src="fotos_confeitaria/foto2.jpeg" alt="Descrição da foto" width="200">
