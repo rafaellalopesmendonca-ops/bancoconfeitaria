@@ -344,7 +344,12 @@ O diagrama representa as entidades, os atributos, os relacionamentos e as cardin
 <img src="fotos_confeitaria/foto4.webp" alt="Descrição da foto" width="200">
 <img src="fotos_confeitaria/fot7.jpeg" alt="Descrição da foto" width="400">
 
-## 9. Uso de Inteligência Artificial
+9. Apresentação Corporativa Final
+
+https://docs.google.com/videos/d/16BGb6fx5Sjps8XwZ5PAcN2DuEOglqDGD5UEvVLyphmo/play?usp=sharing
+
+
+## 10. Uso de Inteligência Artificial
 
 ### ChatGPT
 
