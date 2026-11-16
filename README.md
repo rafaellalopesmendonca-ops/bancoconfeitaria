@@ -337,6 +337,9 @@ O diagrama representa as entidades, os atributos, os relacionamentos e as cardin
 
 ---
 
+
+<img src="fotos-banco/foto1.jpeg" alt="Descrição da foto" width="400">
+
 ## 9. Uso de Inteligência Artificial
 
 ### ChatGPT
